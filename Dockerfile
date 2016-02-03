@@ -6,3 +6,5 @@ RUN cd /var/www/ && git clone https://github.com/ssddanbrown/BookStack.git --bra
 RUN cd /var/www/BookStack && composer install
 COPY .env /var/www/BookStack/.env
 RUN chown -R www-data:www-data /var/www/BookStack
+COPY bookstack.conf /etc/apache2/sites-enabled/bookstack.conf
+RUN a2enmod rewrite
