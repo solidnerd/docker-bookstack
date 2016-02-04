@@ -1,9 +1,14 @@
-# BookStack Docker image
+* 0.7.2 ([Dockerfile](https://github.com/Kilhog/docker-bookstack/blob/master/Dockerfile))
 
-## Usage with linked server
+## How to use this image
 
-First you need to run MySQL server in Docker, and this image need link a running mysql instance container :
+### Run MySQL Container
 ```
-docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 ??/bookstack
+docker pull mysql
+docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=bookstack -e MYSQL_USER=bookstack -e MYSQL_PASSWORD=secret mysql
 ```
-
+### Run Bookstack Container
+```
+docker pull kilhog/bookstack
+docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 kilhog/bookstack
+```
