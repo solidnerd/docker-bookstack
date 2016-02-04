@@ -1,5 +1,5 @@
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
-
+[![](https://badge.imagelayers.io/kilhog/bookstack:latest.svg)](https://imagelayers.io/?images=kilhog/bookstack:latest 'Get your own badge on imagelayers.io')
 * 0.7.2 ([Dockerfile](https://github.com/Kilhog/docker-bookstack/blob/master/Dockerfile))
 
 ## How to use this image
