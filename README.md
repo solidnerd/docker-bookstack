@@ -14,3 +14,5 @@ docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret 
 docker pull kilhog/bookstack
 docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 kilhog/bookstack
 ```
+
+Now you can access to BookStack with : <ip-adress-of-docker-machine>:8080 👍
