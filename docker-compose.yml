@@ -1,0 +1,20 @@
+version: '2'
+services:
+  bookstack:
+    image: kilhog/bookstack
+    depends_on:
+      - db
+    environment:
+    - DB_HOST=db
+    - DB_DATABASE=bookstack
+    - DB_USERNAME=bookstack
+    - DB_PASSWORD=secret
+    ports:
+    - "8080:80"
+  db:
+    image: mysql:5.7.12
+    environment:
+    - MYSQL_ROOT_PASSWORD=secret
+    - MYSQL_DATABASE=bookstack
+    - MYSQL_USER=bookstack
+    - MYSQL_PASSWORD=secret
