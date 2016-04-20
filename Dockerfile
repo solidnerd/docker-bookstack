@@ -1,4 +1,5 @@
 FROM php:5.6-apache
+MAINTAINER kilhog@protonmail.com
 
 ENV BOOKSTACK BookStack
 ENV BOOKSTACK_VERSION 0.9.2
