@@ -1,7 +1,7 @@
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
-[![](https://badge.imagelayers.io/kilhog/bookstack:latest.svg)](https://imagelayers.io/?images=kilhog/bookstack:latest 'Get your own badge on imagelayers.io')
+[![](https://badge.imagelayers.io/solidnerd/bookstack:latest.svg)](https://imagelayers.io/?images=solidnerd/bookstack:latest 'Get your own badge on imagelayers.io')
 
-## Current Version: [0.9.2 ](https://github.com/Kilhog/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [0.9.2 ](https://github.com/SolidNerd/docker-bookstack/blob/preview/Dockerfile)
 
 ## Quickstart
 With Docker Compose is a Quickstart very easy. Run the following command:
@@ -23,7 +23,7 @@ docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret 
 ```
 2. BookStack Container:
 ```
-docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 kilhog/bookstack
+docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidnerd/bookstack
 ```
 
 ### Docker 1.9+
@@ -49,7 +49,7 @@ docker run -d --net bookstack_nw  \
 -e DB_USERNAME=bookstack \
 -e DB_PASSWORD=secret \
 -p 8080:80
- kilhog/bookstack
+ solidnerd/bookstack
 ```
 
 After the steps you can visit  `http://localhost:8080` .
