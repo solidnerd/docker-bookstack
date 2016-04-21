@@ -10,7 +10,7 @@ With Docker Compose is a Quickstart very easy. Run the following command:
 docker-compose up
 ```
 
-and after that open your Browser and go to http://localhost:8080 .
+and after that open your Browser and go to [http://localhost:8080](http://localhost:8080) .
 
 
 ## How to use the Image without Docker compose
@@ -52,4 +52,4 @@ docker run -d --net bookstack_nw  \
  solidnerd/bookstack
 ```
 
-After the steps you can visit  http://localhost:8080 .
+After the steps you can visit [http://localhost:8080](http://localhost:8080) .
