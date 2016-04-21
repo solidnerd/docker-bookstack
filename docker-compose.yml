@@ -1,7 +1,7 @@
 version: '2'
 services:
   bookstack:
-    image: kilhog/bookstack
+    image: solidnerd/bookstack
     depends_on:
       - db
     environment:
