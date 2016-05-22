@@ -1,7 +1,7 @@
 FROM php:5.6-apache
 
 ENV BOOKSTACK BookStack
-ENV BOOKSTACK_VERSION 0.9.3
+ENV BOOKSTACK_VERSION 0.10.0
 
 RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev wget \
    && docker-php-ext-install pdo pdo_mysql mbstring zip \
