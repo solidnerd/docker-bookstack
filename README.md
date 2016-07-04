@@ -1,7 +1,7 @@
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 [![](https://badge.imagelayers.io/solidnerd/bookstack:latest.svg)](https://imagelayers.io/?images=solidnerd/bookstack:latest 'Get your own badge on imagelayers.io')
 
-## Current Version: [0.10.0](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [0.11.0](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
 ## Quickstart
 With Docker Compose is a Quickstart very easy. Run the following command:
