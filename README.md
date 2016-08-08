@@ -1,4 +1,4 @@
-![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](http://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com")
+[![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](http://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com")
 
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 
