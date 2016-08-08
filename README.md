@@ -1,5 +1,6 @@
+![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](http://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com")
+
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
-[![](https://badge.imagelayers.io/solidnerd/bookstack:latest.svg)](https://imagelayers.io/?images=solidnerd/bookstack:latest 'Get your own badge on imagelayers.io')
 
 ## Current Version: [0.11.0](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
