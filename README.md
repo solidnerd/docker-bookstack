@@ -54,3 +54,8 @@ docker run -d --net bookstack_nw  \
 ```
 
 After the steps you can visit [http://localhost:8080](http://localhost:8080) .
+
+
+## Inspiration 
+
+It comes from [Kilhog/docker-bookstack](https://github.com/Kilhog/docker-bookstack). He did the initially work it was a fork previously but know i want to go in a other direction.
