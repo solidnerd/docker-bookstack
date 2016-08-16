@@ -1,7 +1,7 @@
-FROM php:5.6-apache
+FROM php:7.0-apache
 
 ENV BOOKSTACK BookStack
-ENV BOOKSTACK_VERSION 0.11.0
+ENV BOOKSTACK_VERSION 0.11.1
 
 RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev wget \
    && docker-php-ext-install pdo pdo_mysql mbstring zip \
@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg
    && chown -R www-data:www-data /var/www/BookStack \
    && apt-get -y autoremove \
    && apt-get clean \
-   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apache2/sites-enabled/000-*.conf
 
 COPY bookstack.conf /etc/apache2/sites-enabled/bookstack.conf
 RUN a2enmod rewrite
