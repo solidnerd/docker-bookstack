@@ -20,5 +20,7 @@ services:
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
+    volumes:
+    - ./uploads:/var/www/BookStack/public/uploads
     ports:
     - "8080:80"

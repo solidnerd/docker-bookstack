@@ -78,4 +78,6 @@ fi
 
 cd /var/www/BookStack/ && php artisan key:generate && php artisan migrate --force
 
+chown -R www-data:www-data /var/www/BookStack/public/uploads && chmod -R 775 /var/www/BookStack/public/uploads
+
 exec apache2-foreground
