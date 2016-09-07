@@ -2,7 +2,7 @@
 
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 
-## Current Version: [0.11.2](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [0.12.0](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
 ## Quickstart
 With Docker Compose is a Quickstart very easy. Run the following command:
@@ -24,7 +24,7 @@ docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret 
 ```
 2. BookStack Container:
 ```
-docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidnerd/bookstack:0.11.2
+docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidnerd/bookstack:0.12.0
 ```
 
 ### Docker 1.9+
