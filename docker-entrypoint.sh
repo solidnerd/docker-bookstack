@@ -11,6 +11,10 @@ if [ ! -f '/var/www/BookStack/.env' ]; then
       APP_DEBUG=${APP_DEBUG:-false}
       APP_KEY=${APP_KEY:-SomeRandomString}
 
+      # The below url has to be set if using social auth options
+      # or if you are not using BookStack at the root path of your domain.
+      APP_URL=${APP_URL:-null}
+
       # Database details
       DB_HOST=${DB_HOST:-localhost}
       DB_PORT=${DB_PORT:-3306}
