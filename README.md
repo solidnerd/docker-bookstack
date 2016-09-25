@@ -13,6 +13,10 @@ docker-compose up
 
 and after that open your Browser and go to [http://localhost:8080](http://localhost:8080) .
 
+## Issues
+
+If you have any issues feel free to create an [issue on GitHub](https://github.com/solidnerd/docker-bookstack/issues). 
+
 
 ## How to use the Image without Docker compose
 Networking changed in Docker v1.9, so you need to do one of the following steps.
