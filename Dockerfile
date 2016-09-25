@@ -3,8 +3,10 @@ FROM php:7.0-apache
 ENV BOOKSTACK=BookStack \
     BOOKSTACK_VERSION=0.12.1
 
-RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev wget \
+RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng12-dev wget libldap2-dev \
    && docker-php-ext-install pdo pdo_mysql mbstring zip \
+   && docker-php-ext-configure ldap --with-libdir=lib/x86_64-linux-gnu/ \
+   && docker-php-ext-install ldap \
    && docker-php-ext-configure gd --with-freetype-dir=usr/include/ --with-jpeg-dir=/usr/include/ \
    && docker-php-ext-install gd \
    && cd /var/www && curl -sS https://getcomposer.org/installer | php \
