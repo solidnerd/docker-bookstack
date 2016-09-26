@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
+DB_PORT=${DB_PORT:-3306}
+
 echoerr() { echo "$@" 1>&2; }
 
 if [ ! -f '/var/www/BookStack/.env' ]; then
-  if [ "$DB_HOST" ]; then
+  if [[ "${DB_HOST}" ]]; then
   cat > /var/www/BookStack/.env <<EOF
       # Environment
       APP_ENV=production
@@ -77,8 +79,7 @@ if [ ! -f '/var/www/BookStack/.env' ]; then
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
     else
-        echo >&2 'warning: missing MYSQL_PORT_3306_TCP environment variables'
-        echo >&2 '  Did you forget to --link some_mysql_container:mysql ?'
+        echo >&2 'error: missing DB_PORT or DB_HOST environment variables'
         exit 1
     fi
 fi
