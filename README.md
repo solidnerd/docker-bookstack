@@ -49,7 +49,7 @@ docker run -d --net bookstack_nw  \
 3. Create BookStack Container
 ```
 docker run -d --net bookstack_nw  \
--e DB_HOST=bookstack_db \
+-e DB_HOST=bookstack_db:3306 \
 -e DB_DATABASE=bookstack \
 -e DB_USERNAME=bookstack \
 -e DB_PASSWORD=secret \
