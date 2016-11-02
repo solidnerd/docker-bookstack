@@ -2,7 +2,10 @@
 
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 
-## Current Version: [0.12.1](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [0.12.2](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+
+### Changes
+In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like `DB_HOST=mysql:3306`
 
 ## Quickstart
 With Docker Compose is a Quickstart very easy. Run the following command:
@@ -28,7 +31,7 @@ docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret 
 ```
 2. BookStack Container:
 ```
-docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidnerd/bookstack:0.12.1
+docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidnerd/bookstack:0.12.2
 ```
 
 ### Docker 1.9+
@@ -49,7 +52,7 @@ docker run -d --net bookstack_nw  \
 3. Create BookStack Container
 ```
 docker run -d --net bookstack_nw  \
--e DB_HOST=bookstack_db \
+-e DB_HOST=bookstack_db:3306 \
 -e DB_DATABASE=bookstack \
 -e DB_USERNAME=bookstack \
 -e DB_PASSWORD=secret \

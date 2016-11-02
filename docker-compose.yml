@@ -12,11 +12,11 @@ services:
     - ./mysql:/var/lib/mysql
 
   bookstack:
-    image: solidnerd/bookstack:0.12.1
+    image: solidnerd/bookstack:0.12.2
     depends_on:
     - mysql
     environment:
-    - DB_HOST=mysql
+    - DB_HOST=mysql:3306
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
