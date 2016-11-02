@@ -1,9 +1,11 @@
 #!/bin/bash
 set -e
 
-DB_PORT=${DB_PORT:-3306}
-
 echoerr() { echo "$@" 1>&2; }
+
+# Split out host and port from DB_HOST env variable
+IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
+DB_PORT=${DB_PORT:-3306}
 
 if [ ! -f '/var/www/BookStack/.env' ]; then
   if [[ "${DB_HOST}" ]]; then
@@ -19,7 +21,6 @@ if [ ! -f '/var/www/BookStack/.env' ]; then
 
       # Database details
       DB_HOST=${DB_HOST:-localhost}
-      DB_PORT=${DB_PORT:-3306}
       DB_DATABASE=${DB_DATABASE:-bookstack}
       DB_USERNAME=${DB_USERNAME:-bookstack}
       DB_PASSWORD=${DB_PASSWORD:-password}
@@ -79,15 +80,15 @@ if [ ! -f '/var/www/BookStack/.env' ]; then
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
     else
-        echo >&2 'error: missing DB_PORT or DB_HOST environment variables'
+        echo >&2 'error: missing DB_HOST environment variable'
         exit 1
     fi
 fi
 
-echoerr wait-for-db: waiting for ${DB_HOST}:${DB_PORT}
+echoerr wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}
 
 timeout 15 bash <<EOT
-while ! (echo > /dev/tcp/${DB_HOST}/${DB_PORT}) >/dev/null 2>&1;
+while ! (echo > /dev/tcp/${DB_HOST_NAME}/${DB_PORT}) >/dev/null 2>&1;
     do sleep 1;
 done;
 EOT
@@ -98,7 +99,7 @@ if [ $RESULT -eq 0 ]; then
   sleep 1
   echoerr wait-for-db: done
 else
-  echoerr wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST}:${DB_PORT}
+  echoerr wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}
 fi
 
 cd /var/www/BookStack/ && php artisan key:generate && php artisan migrate --force
