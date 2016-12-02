@@ -105,8 +105,9 @@ fi
 cd /var/www/BookStack/ && php artisan key:generate && php artisan migrate --force
 
 
-echo "Setting setting rights for uploads"
+echo "Setting folder permissions for uploads"
 chown -R www-data:www-data /var/www/BookStack/public/uploads && chmod -R 775 /var/www/BookStack/public/uploads
+chown -R www-data:www-data /var/www/BookStack/storage/uploads && chmod -R 775 /var/www/BookStack/storage/uploads
 
 echo "Clear Cache..."
 

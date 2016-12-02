@@ -12,7 +12,7 @@ services:
     - ./mysql:/var/lib/mysql
 
   bookstack:
-    image: solidnerd/bookstack:0.13.0
+    image: solidnerd/bookstack:0.13.1
     depends_on:
     - mysql
     environment:
@@ -22,5 +22,6 @@ services:
     - DB_PASSWORD=secret
     volumes:
     - ./uploads:/var/www/BookStack/public/uploads
+    - ./storage-uploads:/var/www/BookStack/storage/uploads
     ports:
     - "8080:80"
