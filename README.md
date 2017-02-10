@@ -60,7 +60,7 @@ docker run -d --net bookstack_nw  \
  solidnerd/bookstack:0.13.1
 ```
 
-After the steps you can visit [http://localhost:8080](http://localhost:8080) . You can login with username 'bookstack' and password 'secret'.
+After the steps you can visit [http://localhost:8080](http://localhost:8080) . You can login with username 'admin@admin.com' and password 'password'.
 
 
 ## Inspiration
