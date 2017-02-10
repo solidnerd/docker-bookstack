@@ -56,13 +56,13 @@ docker run -d --net bookstack_nw  \
 -e DB_DATABASE=bookstack \
 -e DB_USERNAME=bookstack \
 -e DB_PASSWORD=secret \
--p 8080:80
+-p 8080:80 \
  solidnerd/bookstack:0.13.1
 ```
 
-After the steps you can visit [http://localhost:8080](http://localhost:8080) .
+After the steps you can visit [http://localhost:8080](http://localhost:8080) . You can login with username 'bookstack' and password 'secret'.
 
 
 ## Inspiration
 
-It comes from [Kilhog/docker-bookstack](https://github.com/Kilhog/docker-bookstack). He did the initially work it was a fork previously but know i want to go in a other direction.
+This is a fork of [Kilhog/docker-bookstack](https://github.com/Kilhog/docker-bookstack). Kilhog did the intial work, but I want to go in a different direction.
