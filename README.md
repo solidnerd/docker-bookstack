@@ -1,13 +1,13 @@
-[![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](http://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com")
+## Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 
-# Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
+[![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own license badge on microbadger.com")
 
 ## Current Version: [0.14.3](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
 In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like `DB_HOST=mysql:3306`
 
-## Quickstart
+### Quickstart
 With Docker Compose is a Quickstart very easy. Run the following command:
 
 ```
@@ -16,30 +16,31 @@ docker-compose up
 
 and after that open your Browser and go to [http://localhost:8080](http://localhost:8080) .
 
-## Issues
+### Issues
 
 If you have any issues feel free to create an [issue on GitHub](https://github.com/solidnerd/docker-bookstack/issues).
 
 
-## How to use the Image without Docker compose
+### How to use the Image without Docker compose
 Networking changed in Docker v1.9, so you need to do one of the following steps.
 
-### Docker < v1.9
+#### Docker < v1.9
 1. MySQL Container:
-```
+```bash
 docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=bookstack -e MYSQL_USER=bookstack -e MYSQL_PASSWORD=secret mysql
 ```
 2. BookStack Container:
-```
+```bash
 docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidnerd/bookstack:0.14.3
 ```
 
-### Docker 1.9+
+### #Docker 1.9+
 1. Create a shared network:
-   `docker network create bookstack_nw`
-
-2.  MySQL container :
+```bash
+docker network create bookstack_nw`
 ```
+2.  MySQL container :
+```bash
 docker run -d --net bookstack_nw  \
 -e MYSQL_ROOT_PASSWORD=secret \
 -e MYSQL_DATABASE=bookstack \
@@ -50,7 +51,7 @@ docker run -d --net bookstack_nw  \
 ```
 
 3. Create BookStack Container
-```
+```bash
 docker run -d --net bookstack_nw  \
 -e DB_HOST=bookstack_db:3306 \
 -e DB_DATABASE=bookstack \
@@ -63,6 +64,6 @@ docker run -d --net bookstack_nw  \
 After the steps you can visit [http://localhost:8080](http://localhost:8080) . You can login with username 'admin@admin.com' and password 'password'.
 
 
-## Inspiration
+### Inspiration
 
 This is a fork of [Kilhog/docker-bookstack](https://github.com/Kilhog/docker-bookstack). Kilhog did the intial work, but I want to go in a different direction.
