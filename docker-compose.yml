@@ -9,7 +9,7 @@ services:
     - MYSQL_USER=bookstack
     - MYSQL_PASSWORD=secret
     volumes:
-    - ./mysql:/var/lib/mysql
+    - mysql-data:/var/lib/mysql
 
   bookstack:
     image: solidnerd/bookstack:0.14.3
@@ -27,5 +27,6 @@ services:
     - "8080:80"
 
 volumes:
+ mysql-data:
  uploads:
  storage-uploads:
