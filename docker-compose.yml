@@ -21,7 +21,11 @@ services:
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
     volumes:
-    - ./uploads:/var/www/BookStack/public/uploads
-    - ./storage-uploads:/var/www/BookStack/storage/uploads
+    - uploads:/var/www/BookStack/public/uploads
+    - storage-uploads:/var/www/BookStack/storage/uploads
     ports:
     - "8080:80"
+
+volumes:
+ uploads:
+ storage-uploads:
