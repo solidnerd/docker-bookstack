@@ -17,7 +17,7 @@ RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg
    && chown -R www-data:www-data /var/www/BookStack \
    && apt-get -y autoremove \
    && apt-get clean \
-   && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/* /etc/apache2/sites-enabled/000-*.conf
+   && rm -rf /var/lib/apt/lists/* /var/tmp/* /etc/apache2/sites-enabled/000-*.conf
 
 COPY bookstack.conf /etc/apache2/sites-enabled/bookstack.conf
 RUN a2enmod rewrite
