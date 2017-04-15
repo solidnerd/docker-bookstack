@@ -39,6 +39,7 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile" \
       org.label-schema.license="MIT" \
       org.label-schema.name="bookstack" \
+      org.label-schema.vendor="solidnerd" \
       org.label-schema.url="https://github.com/solidnerd/docker-bookstack/" \
       org.label-schema.vcs-ref=$VCS_REF \
       org.label-schema.vcs-url="https://github.com/solidnerd/docker-bookstack.git" \
