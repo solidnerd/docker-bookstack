@@ -79,6 +79,7 @@ if [ ! -f '/var/www/BookStack/.env' ]; then
       MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-null}
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
+sed -ie "s/single/errorlog/g" config/app.php
     else
         echo >&2 'error: missing DB_HOST environment variable'
         exit 1
@@ -102,16 +103,19 @@ else
   echoerr wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}
 fi
 
-cd /var/www/BookStack/ && php artisan key:generate && php artisan migrate --force
+composer install 
+
+php artisan key:generate
+
+php artisan migrate --force
 
 
 echo "Setting folder permissions for uploads"
-chown -R www-data:www-data /var/www/BookStack/public/uploads && chmod -R 775 /var/www/BookStack/public/uploads
-chown -R www-data:www-data /var/www/BookStack/storage/uploads && chmod -R 775 /var/www/BookStack/storage/uploads
-
-echo "Clear Cache..."
+chown -R www-data:www-data public/uploads && chmod -R 775 public/uploads
+chown -R www-data:www-data storage/uploads && chmod -R 775 storage/uploads
 
 php artisan cache:clear
+
 php artisan view:clear
 
 exec apache2-foreground
