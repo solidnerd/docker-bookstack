@@ -103,12 +103,11 @@ else
   echoerr wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}
 fi
 
-cd /var/www/BookStack/ && php artisan key:generate && php artisan migrate --force
 
 
 echo "Setting folder permissions for uploads"
-chown -R www-data:www-data /var/www/BookStack/public/uploads && chmod -R 775 /var/www/BookStack/public/uploads
-chown -R www-data:www-data /var/www/BookStack/storage/uploads && chmod -R 775 /var/www/BookStack/storage/uploads
+chown -R www-data:www-data public/uploads && chmod -R 775 public/uploads
+chown -R www-data:www-data storage/uploads && chmod -R 775 storage/uploads
 
 echo "Clear Cache..."
 
