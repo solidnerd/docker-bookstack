@@ -29,6 +29,8 @@ WORKDIR $BOOKSTACK_HOME
 
 EXPOSE 80
 
+VOLUME ["$BOOKSTACK_HOME/public/uploads","$BOOKSTACK_HOME/public/storage"]
+
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
 ARG BUILD_DATE
