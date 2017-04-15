@@ -105,14 +105,17 @@ fi
 
 composer install 
 
+php artisan key:generate
+
+php artisan migrate --force
+
 
 echo "Setting folder permissions for uploads"
 chown -R www-data:www-data public/uploads && chmod -R 775 public/uploads
 chown -R www-data:www-data storage/uploads && chmod -R 775 storage/uploads
 
-echo "Clear Cache..."
-
 php artisan cache:clear
+
 php artisan view:clear
 
 exec apache2-foreground
