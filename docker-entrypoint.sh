@@ -7,9 +7,9 @@ echoerr() { echo "$@" 1>&2; }
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
 
-if [ ! -f '/var/www/BookStack/.env' ]; then
+if [ ! -f '/var/www/bookstack/.env' ]; then
   if [[ "${DB_HOST}" ]]; then
-  cat > /var/www/BookStack/.env <<EOF
+  cat > /var/www/bookstack/.env <<EOF
       # Environment
       APP_ENV=production
       APP_DEBUG=${APP_DEBUG:-false}
