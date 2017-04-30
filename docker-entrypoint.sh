@@ -13,7 +13,7 @@ if [ ! -f '$BOOKSTACK_HOME/.env' ]; then
       # Environment
       APP_ENV=production
       APP_DEBUG=${APP_DEBUG:-false}
-      APP_KEY=${APP_KEY:-SomeRandomString}
+      APP_KEY=${APP_KEY:-SomeRandomStringWith32Characters}
 
       # The below url has to be set if using social auth options
       # or if you are not using BookStack at the root path of your domain.
@@ -103,7 +103,7 @@ else
   echoerr wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}
 fi
 
-composer install 
+composer install
 
 php artisan key:generate
 
