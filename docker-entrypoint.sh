@@ -9,11 +9,15 @@ DB_PORT=${DB_PORT:-3306}
 
 if [ ! -f '$BOOKSTACK_HOME/.env' ]; then
   if [[ "${DB_HOST}" ]]; then
-  cat > "$BOOKSTACK_HOME/.env" <<EOF
+    # Generate random App Key
+    APP_KEY=$(cat /dev/urandom | tr -dc 'a-zA-Z0-9' | fold -w 32 | head -n 1)
+    echoerr Generated app key: $APP_KEY
+
+    cat > "$BOOKSTACK_HOME/.env" <<EOF
       # Environment
       APP_ENV=production
       APP_DEBUG=${APP_DEBUG:-false}
-      APP_KEY=${APP_KEY:-SomeRandomStringWith32Characters}
+      APP_KEY=${APP_KEY}
 
       # The below url has to be set if using social auth options
       # or if you are not using BookStack at the root path of your domain.
@@ -79,11 +83,11 @@ if [ ! -f '$BOOKSTACK_HOME/.env' ]; then
       MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-null}
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
-sed -ie "s/single/errorlog/g" config/app.php
-    else
-        echo >&2 'error: missing DB_HOST environment variable'
-        exit 1
-    fi
+    sed -ie "s/single/errorlog/g" config/app.php
+  else
+    echo >&2 'error: missing DB_HOST environment variable'
+    exit 1
+  fi
 fi
 
 echoerr wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}
@@ -104,8 +108,6 @@ else
 fi
 
 composer install
-
-php artisan key:generate
 
 php artisan migrate --force
 
