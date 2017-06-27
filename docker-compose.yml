@@ -16,7 +16,7 @@ services:
     depends_on:
     - mysql
     environment:
-    - DB_HOST=mysql:3306
+    - DB_HOST=mysql
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
