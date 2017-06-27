@@ -5,7 +5,7 @@
 ## Current Version: [0.16.2](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
-In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like `DB_HOST=mysql:3306`
+In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like `DB_HOST=mysql`
 
 ### Quickstart
 With Docker Compose is a Quickstart very easy. Run the following command:
@@ -53,7 +53,7 @@ docker run -d --net bookstack_nw  \
 3. Create BookStack Container
 ```bash
 docker run -d --net bookstack_nw  \
--e DB_HOST=bookstack_db:3306 \
+-e DB_HOST=bookstack_db \
 -e DB_DATABASE=bookstack \
 -e DB_USERNAME=bookstack \
 -e DB_PASSWORD=secret \
