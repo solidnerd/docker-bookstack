@@ -7,7 +7,7 @@ echoerr() { echo "$@" 1>&2; }
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
 
-if [ ! -f '$BOOKSTACK_HOME/.env' ]; then
+if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
   if [[ "${DB_HOST}" ]]; then
   cat > "$BOOKSTACK_HOME/.env" <<EOF
       # Environment
