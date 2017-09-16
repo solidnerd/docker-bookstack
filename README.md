@@ -34,7 +34,7 @@ docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret 
 docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidnerd/bookstack:0.17.1
 ```
 
-### Docker 1.9+
+#### Docker 1.9+
 
 1.Create a shared network:
 
