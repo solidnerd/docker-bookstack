@@ -68,6 +68,7 @@ docker run -d --net bookstack_nw  \
 
 After the steps you can visit [http://localhost:8080](http://localhost:8080) . You can login with username 'admin@admin.com' and password 'password'.
 
+Note that if you want to use LDAP, `$` has to be escape like `\$`, i.e. `-e "LDAP_USER_FILTER"="(&(uid=\${user}))"`
 
 ### Inspiration
 
