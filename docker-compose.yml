@@ -2,7 +2,7 @@ version: '2'
 services:
 
   mysql:
-    image: mysql:5.7.12
+    image: mysql:5.7.20
     environment:
     - MYSQL_ROOT_PASSWORD=secret
     - MYSQL_DATABASE=bookstack

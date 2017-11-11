@@ -27,7 +27,7 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
 #### Docker < v1.9
 1. MySQL Container:
 ```bash
-docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=bookstack -e MYSQL_USER=bookstack -e MYSQL_PASSWORD=secret mysql
+docker run -d --name bookstack-mysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=secret -e MYSQL_DATABASE=bookstack -e MYSQL_USER=bookstack -e MYSQL_PASSWORD=secret mysql:5.7.20
 ```
 2. BookStack Container:
 ```bash
@@ -50,7 +50,7 @@ docker run -d --net bookstack_nw  \
 -e MYSQL_USER=bookstack \
 -e MYSQL_PASSWORD=secret \
  --name="bookstack_db" \
- mysql
+ mysql:5.7.20
 ```
 
 
