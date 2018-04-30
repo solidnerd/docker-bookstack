@@ -77,6 +77,8 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       MAIL_USERNAME=${MAIL_USERNAME:-null}
       MAIL_PASSWORD=${MAIL_PASSWORD:-null}
       MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-null}
+      MAIL_FROM=${MAIL_FROM:-null}
+      MAIL_FROM_NAME=${MAIL_FROM_NAME:-null}
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
 sed -ie "s/single/errorlog/g" config/app.php
