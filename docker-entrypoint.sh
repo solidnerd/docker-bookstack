@@ -3,9 +3,49 @@ set -e
 
 echoerr() { echo "$@" 1>&2; }
 
+# 'Borrowed' from hhttps://github.com/docker-library/postgres/blob/master/11/docker-entrypoint.sh#L5
+# usage: file_env VAR [DEFAULT]
+#    ie: file_env 'XYZ_DB_PASSWORD' 'example'
+# (will allow for "$XYZ_DB_PASSWORD_FILE" to fill in the value of
+#  "$XYZ_DB_PASSWORD" from a file, especially for Docker's secrets feature)
+file_env() {
+	local var="$1"
+	local fileVar="${var}_FILE"
+	local def="${2:-}"
+	if [ "${!var:-}" ] && [ "${!fileVar:-}" ]; then
+		echo >&2 "error: both $var and $fileVar are set (but are exclusive)"
+		exit 1
+	fi
+	local val="$def"
+	if [ "${!var:-}" ]; then
+		val="${!var}"
+	elif [ "${!fileVar:-}" ]; then
+		val="$(< "${!fileVar}")"
+	fi
+	export "$var"="$val"
+	unset "$fileVar"
+}
+
 # Split out host and port from DB_HOST env variable
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
+
+file_env 'DB_HOST'      'localhost'
+file_env 'DB_DATABASE'  'bookstack'
+file_env 'DB_USERNAME'  'bookstack'
+file_env 'DB_PASSWORD'  'password'
+file_env 'APP_KEY'      'SomeRandomStringWith32Characters'
+file_env 'TORAGE_S3_KEY' 'false'
+file_env 'STORAGE_S3_SECRET' 'false'
+file_env 'STORAGE_S3_REGION' 'false'
+file_env 'STORAGE_S3_BUCKET' 'false'
+file_env 'GITHUB_APP_ID' 'false'
+file_env 'GITHUB_APP_SECRET' 'false'
+file_env 'GOOGLE_APP_ID' 'false'
+file_env 'GOOGLE_APP_SECRET' 'false'
+file_env 'LDAP_PASS' 'false'
+file_env 'MAIL_USERNAME' 'null'
+file_env 'MAIL_PASSWORD' 'null'
 
 if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
   if [[ "${DB_HOST}" ]]; then
@@ -13,17 +53,17 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       # Environment
       APP_ENV=production
       APP_DEBUG=${APP_DEBUG:-false}
-      APP_KEY=${APP_KEY:-SomeRandomStringWith32Characters}
+      APP_KEY=$APP_KEY
 
       # The below url has to be set if using social auth options
       # or if you are not using BookStack at the root path of your domain.
       APP_URL=${APP_URL:-null}
 
       # Database details
-      DB_HOST=${DB_HOST:-localhost}
-      DB_DATABASE=${DB_DATABASE:-bookstack}
-      DB_USERNAME=${DB_USERNAME:-bookstack}
-      DB_PASSWORD=${DB_PASSWORD:-password}
+      DB_HOST=$DB_HOST
+      DB_DATABASE=$DB_DATABASE
+      DB_USERNAME=$DB_USERNAME
+      DB_PASSWORD=$DB_PASSWORD
 
       # Cache and session
       CACHE_DRIVER=file
@@ -42,10 +82,10 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       # Storage
       STORAGE_TYPE=${STORAGE_TYPE:-local}
       # Amazon S3 Config
-      STORAGE_S3_KEY=${STORAGE_S3_KEY:-false}
-      STORAGE_S3_SECRET=${STORAGE_S3_SECRET:-false}
-      STORAGE_S3_REGION=${STORAGE_S3_REGION:-false}
-      STORAGE_S3_BUCKET=${STORAGE_S3_BUCKET:-false}
+      STORAGE_S3_KEY=$STORAGE_S3_KEY
+      STORAGE_S3_SECRET=$STORAGE_S3_SECRET
+      STORAGE_S3_REGION=$STORAGE_S3_REGION
+      STORAGE_S3_BUCKET=$STORAGE_S3_BUCKET
       # Storage URL
       # Used to prefix image urls for when using custom domains/cdns
       STORAGE_URL=${STORAGE_URL:-false}
@@ -54,10 +94,10 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       AUTH_METHOD=${AUTH_METHOD:-standard}
 
       # Social Authentication information. Defaults as off.
-      GITHUB_APP_ID=${GITHUB_APP_ID:-false}
-      GITHUB_APP_SECRET=${GITHUB_APP_SECRET:-false}
-      GOOGLE_APP_ID=${GOOGLE_APP_ID:-false}
-      GOOGLE_APP_SECRET=${GOOGLE_APP_SECRET:-false}
+      GITHUB_APP_ID=$GITHUB_APP_ID
+      GITHUB_APP_SECRET=$GITHUB_APP_SECRET
+      GOOGLE_APP_ID=$GOOGLE_APP_ID
+      GOOGLE_APP_SECRET=$GOOGLE_APP_SECRET
 
       # External services such as Gravatar
       DISABLE_EXTERNAL_SERVICES=${DISABLE_EXTERNAL_SERVICES:-false}
@@ -66,7 +106,7 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       LDAP_SERVER=${LDAP_SERVER:-false}
       LDAP_BASE_DN=${LDAP_BASE_DN:-false}
       LDAP_DN=${LDAP_DN:-false}
-      LDAP_PASS=${LDAP_PASS:-false}
+      LDAP_PASS=$LDAP_PASS
       LDAP_USER_FILTER=${LDAP_USER_FILTER:-false}
       LDAP_VERSION=${LDAP_VERSION:-false}
 
@@ -74,8 +114,8 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       MAIL_DRIVER=${MAIL_DRIVER:-smtp}
       MAIL_HOST=${MAIL_HOST:-localhost}
       MAIL_PORT=${MAIL_PORT:-1025}
-      MAIL_USERNAME=${MAIL_USERNAME:-null}
-      MAIL_PASSWORD=${MAIL_PASSWORD:-null}
+      MAIL_USERNAME=$MAIL_USERNAME
+      MAIL_PASSWORD=$MAIL_PASSWORD
       MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-null}
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
