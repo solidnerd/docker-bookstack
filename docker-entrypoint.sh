@@ -30,22 +30,22 @@ file_env() {
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
 
-file_env 'DB_HOST'      'localhost'
-file_env 'DB_DATABASE'  'bookstack'
-file_env 'DB_USERNAME'  'bookstack'
-file_env 'DB_PASSWORD'  'password'
-file_env 'APP_KEY'      'SomeRandomStringWith32Characters'
-file_env 'TORAGE_S3_KEY' 'false'
-file_env 'STORAGE_S3_SECRET' 'false'
-file_env 'STORAGE_S3_REGION' 'false'
-file_env 'STORAGE_S3_BUCKET' 'false'
-file_env 'GITHUB_APP_ID' 'false'
-file_env 'GITHUB_APP_SECRET' 'false'
-file_env 'GOOGLE_APP_ID' 'false'
-file_env 'GOOGLE_APP_SECRET' 'false'
-file_env 'LDAP_PASS' 'false'
-file_env 'MAIL_USERNAME' 'null'
-file_env 'MAIL_PASSWORD' 'null'
+file_env 'DB_HOST'      	'localhost'
+file_env 'DB_DATABASE'  	'bookstack'
+file_env 'DB_USERNAME'  	'bookstack'
+file_env 'DB_PASSWORD'  	'password'
+file_env 'APP_KEY'      	'SomeRandomStringWith32Characters'
+file_env 'TORAGE_S3_KEY' 	'false'
+file_env 'STORAGE_S3_SECRET' 	'false'
+file_env 'STORAGE_S3_REGION' 	'false'
+file_env 'STORAGE_S3_BUCKET' 	'false'
+file_env 'GITHUB_APP_ID' 	'false'
+file_env 'GITHUB_APP_SECRET' 	'false'
+file_env 'GOOGLE_APP_ID' 	'false'
+file_env 'GOOGLE_APP_SECRET' 	'false'
+file_env 'LDAP_PASS' 		'false'
+file_env 'MAIL_USERNAME' 	'null'
+file_env 'MAIL_PASSWORD' 	'null'
 
 if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
   if [[ "${DB_HOST}" ]]; then
