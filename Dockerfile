@@ -1,4 +1,4 @@
-FROM php:7.1-apache
+FROM php:7.1-apache-stretch
 
 ENV BOOKSTACK=BookStack \
     BOOKSTACK_VERSION=0.22.0 \
