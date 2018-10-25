@@ -39,7 +39,7 @@ docker run --name my-bookstack -d --link bookstack-mysql:mysql -p 8080:80 solidn
 1.Create a shared network:
 
 ```bash
-docker network create bookstack_nw`
+docker network create bookstack_nw
 ```
 
 2.MySQL container :
