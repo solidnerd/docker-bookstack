@@ -12,7 +12,7 @@ RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg
    && docker-php-ext-install gd \
    && cd /var/www && curl -sS https://getcomposer.org/installer | php \
    && mv /var/www/composer.phar /usr/local/bin/composer \
-   && wget https://github.com/ssddanbrown/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz -O ${BOOKSTACK}.tar.gz \
+   && wget https://github.com/BookStackApp/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz -O ${BOOKSTACK}.tar.gz \
    && tar -xf ${BOOKSTACK}.tar.gz && mv BookStack-${BOOKSTACK_VERSION} ${BOOKSTACK_HOME} && rm ${BOOKSTACK}.tar.gz  \
    && cd $BOOKSTACK_HOME && composer install \
    && chown -R www-data:www-data $BOOKSTACK_HOME \
