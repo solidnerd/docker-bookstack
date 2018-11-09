@@ -70,6 +70,13 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       LDAP_USER_FILTER=${LDAP_USER_FILTER:-false}
       LDAP_VERSION=${LDAP_VERSION:-false}
 
+      # AzureAD settings
+      # Replace the below (including '{}' braces) with your azure APP_ID and APP_SECRET and TENANT
+      AZURE_AUTO_REGISTER=${AZURE_AUTO_REGISTER:-false}
+      AZURE_APP_ID=${AZURE_APP_ID:-false}
+      AZURE_APP_SECRET=${AZURE_APP_SECRET:-false}
+      AZURE_TENANT=${AZURE_TENANT:-false}
+
       # Mail settings
       MAIL_DRIVER=${MAIL_DRIVER:-smtp}
       MAIL_HOST=${MAIL_HOST:-localhost}
