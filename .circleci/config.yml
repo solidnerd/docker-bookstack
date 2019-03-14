@@ -61,7 +61,10 @@ workflows:
             - shellcheck
   release:
     jobs:
+      - build-deploy-e2e
       - release:
+          requires:
+            - build-deploy-e2e
           filters:
             tags:
               only: /^([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*).*$/
