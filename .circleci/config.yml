@@ -10,7 +10,7 @@ jobs:
           command: |
             find . -type f -name '*.sh' | wc -l
             find . -type f -name '*.sh' | xargs shellcheck -e SC2086 -e SC1090 --external-sources
-  build:
+  e2e:
     docker:
     - image: circleci/golang:1.11.5
     steps:
@@ -18,8 +18,10 @@ jobs:
     - setup_remote_docker:
         docker_layer_caching: true
     - run:
-        name: Create docker image
-        command: make build
+        name: Test Image
+        command: |
+          docker login -u $docker_user -p $docker_password
+          make e2e
 
   build-deploy:
     docker:
@@ -60,11 +62,14 @@ workflows:
             branches: 
               ignore: 
                 - master
-      - build:
+      - build-deploy:
           filters:
             branches: 
               ignore: 
                 - master
+      - e2e:
+          requires:
+            - build-deploy
   deploy:
     jobs:
       - shellcheck
