@@ -10,20 +10,8 @@ jobs:
           command: |
             find . -type f -name '*.sh' | wc -l
             find . -type f -name '*.sh' | xargs shellcheck -e SC2086 -e SC1090 --external-sources
-  e2e:
-    docker:
-    - image: circleci/golang:1.11.5
-    steps:
-    - checkout
-    - setup_remote_docker:
-        docker_layer_caching: true
-    - run:
-        name: Test Image
-        command: |
-          docker login -u $docker_user -p $docker_password
-          make e2e
 
-  build-deploy:
+  build-deploy-e2e:
     docker:
     - image: circleci/golang:1.11.5
     steps:
@@ -34,12 +22,17 @@ jobs:
         name: Create docker image
         command: make build
     - run:
-        name: Logg into Docker registry
-        command: docker login -u $docker_release_user -p $docker_release_password
+        name: Run E2E Test
+        command: make e2e
     - run:
-        name: Publish docker image
-        command: make push
-
+        name: Push docker image
+        command: |
+          if [[ -z "${CIRCLE_PULL_REQUEST}" ]] && [[ "${CIRCLE_PROJECT_USERNAME}" = "solidnerd" ]] ; then
+            echo $docker_password | docker login --username $docker_user --password-stdin
+            make push
+          else
+            echo "Do not push image"
+          fi
   release:
     docker:
     - image: circleci/golang:1.11.5
@@ -55,31 +48,12 @@ jobs:
 
 workflows:
   version: 2
-  verify:
-    jobs:
-      - shellcheck:
-          filters:
-            branches: 
-              ignore: 
-                - master
-      - build-deploy:
-          filters:
-            branches: 
-              ignore: 
-                - master
-      - e2e:
-          requires:
-            - build-deploy
-  deploy:
+  build-and-verify:
     jobs:
       - shellcheck
-      - build-deploy:
+      - build-deploy-e2e:
           requires:
             - shellcheck
-          filters:
-            branches: 
-              only: 
-                - master
   release:
     jobs:
       - release:
