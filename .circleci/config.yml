@@ -6,11 +6,6 @@ jobs:
     steps:
       - checkout
       - run:
-          name: Check Docker Hub Hooks
-          command: |
-            find hooks -type f | wc -l
-            find hooks -type f | xargs shellcheck -e SC2086 --external-sources
-      - run:
           name: Check Scripts
           command: |
             find . -type f -name '*.sh' | wc -l
