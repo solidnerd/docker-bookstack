@@ -60,12 +60,22 @@ workflows:
   version: 2
   verify:
     jobs:
-      - shellcheck
-      - build
+      - shellcheck:
+          filters:
+            branches: 
+              ignore: 
+                - master
+      - build:
+          filters:
+            branches: 
+              ignore: 
+                - master
   deploy:
     jobs:
       - shellcheck
       - build-deploy:
+          requires:
+            - shellcheck
           filters:
             branches: 
               only: 
