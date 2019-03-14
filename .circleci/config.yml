@@ -41,6 +41,11 @@ jobs:
     - setup_remote_docker:
         docker_layer_caching: true
     - run:
+        name: Pull release image
+        command: |
+          echo $docker_password | docker login --username $docker_user --password-stdin
+          make pull
+    - run:
         name: Login to public Docker HUB
         command: |
             docker login -u $docker_release_user -p $docker_release_password
