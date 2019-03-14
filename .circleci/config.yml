@@ -1,0 +1,81 @@
+version: 2
+jobs:
+  shellcheck:
+    docker:
+      - image: nlknguyen/alpine-shellcheck:v0.4.6
+    steps:
+      - checkout
+      - run:
+          name: Check Docker Hub Hooks
+          command: |
+            find hooks -type f | wc -l
+            find hooks -type f | xargs shellcheck -e SC2086 --external-sources
+      - run:
+          name: Check Scripts
+          command: |
+            find . -type f -name '*.sh' | wc -l
+            find . -type f -name '*.sh' | xargs shellcheck -e SC2086 -e SC1090 --external-sources
+  build:
+    docker:
+    - image: circleci/golang:1.11.5
+    steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Create docker image
+        command: make build
+
+  build-deploy:
+    docker:
+    - image: circleci/golang:1.11.5
+    steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Create docker image
+        command: make build
+    - run:
+        name: Logg into Docker registry
+        command: docker login -u $docker_release_user -p $docker_release_password
+    - run:
+        name: Publish docker image
+        command: make push
+
+  release:
+    docker:
+    - image: circleci/golang:1.11.5
+    steps:
+    - checkout
+    - setup_remote_docker:
+        docker_layer_caching: true
+    - run:
+        name: Login to public Docker HUB
+        command: |
+            docker login -u $docker_release_user -p $docker_release_password
+            make release
+
+workflows:
+  version: 2
+  verify:
+    jobs:
+      - shellcheck
+      - build
+  deploy:
+    jobs:
+      - build-deploy:
+          requires:
+            - shellcheck
+          filters:
+            branches: 
+              only: 
+                - master
+  release:
+    jobs:
+      - release:
+          filters:
+            tags:
+              only: /^([0-9]\d*)\.([0-9]\d*)\.([0-9]\d*).*$/
+            branches:
+              ignore: /.*/
