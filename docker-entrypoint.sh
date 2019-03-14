@@ -86,7 +86,7 @@ sed -ie "s/single/errorlog/g" config/app.php
     fi
 fi
 
-echoerr wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}
+echoerr "wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}"
 
 timeout 15 bash <<EOT
 while ! (echo > /dev/tcp/${DB_HOST_NAME}/${DB_PORT}) >/dev/null 2>&1;
@@ -98,9 +98,9 @@ RESULT=$?
 if [ $RESULT -eq 0 ]; then
   # sleep another second for so that we don't get a "the database system is starting up" error
   sleep 1
-  echoerr wait-for-db: done
+  echoerr "wait-for-db: done"
 else
-  echoerr wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}
+  echoerr "wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}"
 fi
 
 composer install
