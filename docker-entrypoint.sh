@@ -78,12 +78,25 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       MAIL_PASSWORD=${MAIL_PASSWORD:-null}
       MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-null}
       # URL used for social login redirects, NO TRAILING SLASH
+
+      # Language Configuration
+      APP_LANG=${APP_LANG:-en}
+      APP_AUTO_LANG_PUBLIC=${APP_AUTO_LANG_PUBLIC:-true}
 EOF
 sed -ie "s/single/errorlog/g" config/app.php
     else
         echo >&2 'error: missing DB_HOST environment variable'
         exit 1
     fi
+fi
+
+if [ ! -f "/usr/local/etc/php/php.ini" ]; then
+  cat > "/usr/local/etc/php/php.ini" <<EOF
+[PHP]
+
+post_max_size = ${post_max_size:-10M}
+upload_max_filesize = ${upload_max_filesize:-10M}
+EOF
 fi
 
 echoerr "wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}"
