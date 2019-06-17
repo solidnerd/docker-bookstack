@@ -15,7 +15,7 @@ build:
 	--build-arg BUILD_DATE=$(BUILD_DATE) \
 	--build-arg VCS_URL=$(VCS_URL) 
 
-push:
+push-dev:
 	docker push $(DOCKER_RELEASE_REG)/$(DOCKER_IMAGE_DEV):$(DOCKER_INTERNAL_TAG)
 
 pull:
@@ -25,6 +25,7 @@ release:
 	docker tag $(DOCKER_RELEASE_REG)/$(DOCKER_IMAGE_DEV):$(DOCKER_INTERNAL_TAG) $(DOCKER_RELEASE_REG)/$(DOCKER_IMAGE):$(DOCKER_RELEASE_TAG)
 	docker tag $(DOCKER_RELEASE_REG)/$(DOCKER_IMAGE_DEV):$(DOCKER_INTERNAL_TAG) $(DOCKER_RELEASE_REG)/$(DOCKER_IMAGE):latest
 
+push-release:
 	docker push $(DOCKER_RELEASE_REG)/$(DOCKER_IMAGE):$(DOCKER_RELEASE_TAG)
 	docker push $(DOCKER_RELEASE_REG)/$(DOCKER_IMAGE):latest
 

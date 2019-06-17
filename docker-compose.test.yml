@@ -22,7 +22,7 @@ services:
     - DB_PASSWORD=secret
     volumes:
     - uploads:/var/www/bookstack/public/uploads
-    - storage-uploads:/var/www/bookstack/public/storage
+    - storage-uploads:/var/www/bookstack/storage/uploads
     ports:
     - "8080:80"
 

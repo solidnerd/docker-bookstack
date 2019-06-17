@@ -50,6 +50,7 @@ jobs:
         command: |
             docker login -u $docker_release_user -p $docker_release_password
             make release
+            make push-release
 
 workflows:
   version: 2
