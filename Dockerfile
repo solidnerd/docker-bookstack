@@ -30,7 +30,7 @@ WORKDIR $BOOKSTACK_HOME
 
 EXPOSE 80
 
-VOLUME ["$BOOKSTACK_HOME/public/uploads","$BOOKSTACK_HOME/public/storage"]
+VOLUME ["$BOOKSTACK_HOME/public/uploads","$BOOKSTACK_HOME/storage/uploads"]
 
 ENTRYPOINT ["/docker-entrypoint.sh"]
 
