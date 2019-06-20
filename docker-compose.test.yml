@@ -3,6 +3,8 @@ services:
   sut:
     image: appropriate/curl
     command: ["--retry", "15","--retry-delay","5","--retry-connrefused","http://bookstack/login"]
+    depends_on:
+    - bookstack
   mysql:
     image: mysql:5.7.21
     environment:
@@ -14,8 +16,7 @@ services:
     - mysql-data:/var/lib/mysql
 
   bookstack:
-    container_name: bookstack
-    image: ${BOOKSTACK_IMAGE}
+    image: ${BOOKSTACK_IMAGE:-solidnerd/bookstack}
     depends_on:
     - mysql
     environment:
