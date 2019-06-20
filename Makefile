@@ -34,7 +34,6 @@ e2e:
 	@BOOKSTACK_IMAGE="$(DOCKER_RELEASE_REG)/${DOCKER_IMAGE_DEV}:${DOCKER_INTERNAL_TAG}" docker-compose -f docker-compose.test.yml up -d
 	@echo "Wait 30 seconds to spinn up everything"
 	@sleep 30
-	@docker run --network container:$$(docker-compose -f docker-compose.test.yml ps -q bookstack) \
-		appropriate/curl --retry 15 --retry-delay 5 --retry-connrefused http://localhost/login
-	@docker-compose  down -v
+	@BOOKSTACK_IMAGE="$(DOCKER_RELEASE_REG)/${DOCKER_IMAGE_DEV}:${DOCKER_INTERNAL_TAG}" docker-compose -f docker-compose.test.yml run --rm sut
+	@BOOKSTACK_IMAGE="$(DOCKER_RELEASE_REG)/${DOCKER_IMAGE_DEV}:${DOCKER_INTERNAL_TAG}" docker-compose -f docker-compose.test.yml down -v
 
