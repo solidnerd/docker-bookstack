@@ -1,5 +1,8 @@
-version: '2'
+version: '2.4'
 services:
+  sut:
+    image: appropriate/curl
+    command: ["--retry", "15","--retry-delay","5","--retry-connrefused","http://bookstack/login"]
   mysql:
     image: mysql:5.7.21
     environment:
