@@ -63,6 +63,7 @@ docker run -d --net bookstack_nw  \
 -e DB_USERNAME=bookstack \
 -e DB_PASSWORD=secret \
 -p 8080:80 \
+--name="bookstack" \
  solidnerd/bookstack:0.26.2
 ```
 
