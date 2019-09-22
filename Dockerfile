@@ -1,11 +1,11 @@
-FROM php:7.1-apache-stretch
+FROM php:7.2-apache-stretch
 
 ENV BOOKSTACK=BookStack \
     BOOKSTACK_VERSION=0.27.4 \
     BOOKSTACK_HOME="/var/www/bookstack"
 
-RUN apt-get update && apt-get install -y git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev wget libldap2-dev libtidy-dev \
-   && docker-php-ext-install pdo pdo_mysql mbstring zip tidy \
+RUN apt-get update && apt-get install -y --no-install-recommends git zlib1g-dev libfreetype6-dev libjpeg62-turbo-dev libmcrypt-dev libpng-dev wget libldap2-dev libtidy-dev libxml2-dev fontconfig ttf-freefont wkhtmltopdf tar curl \
+   && docker-php-ext-install dom pdo pdo_mysql zip tidy  \
    && docker-php-ext-configure ldap \
    && docker-php-ext-install ldap \
    && docker-php-ext-configure gd --with-freetype-dir=usr/include/ --with-jpeg-dir=/usr/include/ \
