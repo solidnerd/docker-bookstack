@@ -1,36 +1,58 @@
-version: '2.4'
+version: "2.4"
 services:
   sut:
     image: appropriate/curl
-    command: ["--ipv4","--retry", "30","--retry-delay","10","--retry-connrefused","http://bookstack/login"]
+    command:
+      [
+        "--show-error",
+        "--silent",
+        "--ipv4",
+        "--retry",
+        "30",
+        "--retry-delay",
+        "10",
+        "--retry-connrefused",
+        "http://bookstack/login",
+      ]
     depends_on:
-    - bookstack
+      - bookstack
+    networks:
+      - frontend
+
   mysql:
     image: mysql:5.7.21
     environment:
-    - MYSQL_ROOT_PASSWORD=secret
-    - MYSQL_DATABASE=bookstack
-    - MYSQL_USER=bookstack
-    - MYSQL_PASSWORD=secret
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=bookstack
+      - MYSQL_USER=bookstack
+      - MYSQL_PASSWORD=secret
     volumes:
-    - mysql-data:/var/lib/mysql
+      - mysql-data:/var/lib/mysql
+    networks:
+      - backend
 
   bookstack:
     image: ${BOOKSTACK_IMAGE:-solidnerd/bookstack}
     depends_on:
-    - mysql
+      - mysql
     environment:
-    - DB_HOST=mysql:3306
-    - DB_DATABASE=bookstack
-    - DB_USERNAME=bookstack
-    - DB_PASSWORD=secret
+      - DB_HOST=mysql:3306
+      - DB_DATABASE=bookstack
+      - DB_USERNAME=bookstack
+      - DB_PASSWORD=secret
     volumes:
-    - uploads:/var/www/bookstack/public/uploads
-    - storage-uploads:/var/www/bookstack/storage/uploads
-    ports:
-    - "8080:80"
+      - uploads:/var/www/bookstack/public/uploads
+      - storage-uploads:/var/www/bookstack/storage/uploads
+    ports: ["80"]
+    networks:
+      - frontend
+      - backend
 
 volumes:
- mysql-data:
- uploads:
- storage-uploads:
+  mysql-data:
+  uploads:
+  storage-uploads:
+
+networks:
+  frontend:
+  backend:
