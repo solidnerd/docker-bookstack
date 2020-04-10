@@ -17,7 +17,7 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker:
-        docker_layer_caching: true
+        docker_layer_caching: false
     - run:
         name: Create docker image
         command: make build
@@ -39,7 +39,7 @@ jobs:
     steps:
     - checkout
     - setup_remote_docker:
-        docker_layer_caching: true
+        docker_layer_caching: false
     - run:
         name: Pull release image
         command: |
