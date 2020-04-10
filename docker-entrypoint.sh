@@ -7,9 +7,9 @@ echoerr() { echo "$@" 1>&2; }
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
 
-if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
+if [ ! -f ".env" ]; then
   if [[ "${DB_HOST}" ]]; then
-  cat > "$BOOKSTACK_HOME/.env" <<EOF
+  cat > ".env" <<EOF
       # Environment
       APP_ENV=production
       APP_DEBUG=${APP_DEBUG:-false}
@@ -79,7 +79,6 @@ if [ ! -f "$BOOKSTACK_HOME/.env" ]; then
       MAIL_ENCRYPTION=${MAIL_ENCRYPTION:-null}
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
-sed -ie "s/single/errorlog/g" app/Config/app.php
     else
         echo >&2 'error: missing DB_HOST environment variable'
         exit 1
@@ -103,19 +102,14 @@ else
   echoerr "wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}"
 fi
 
-composer install
+echo "Generating Key..."
+php artisan key:generate --show
 
-php artisan key:generate
-
+echo "Starting Migration..."
 php artisan migrate --force
 
-
-echo "Setting folder permissions for uploads"
-chown -R www-data:www-data public/uploads && chmod -R 775 public/uploads
-chown -R www-data:www-data storage/uploads && chmod -R 775 storage/uploads
-
+echo "Clearing caches..."
 php artisan cache:clear
-
 php artisan view:clear
 
 exec apache2-foreground
