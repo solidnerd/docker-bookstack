@@ -2,7 +2,7 @@ version: '2.4'
 services:
   sut:
     image: appropriate/curl
-    command: ["--retry", "15","--retry-delay","5","--retry-connrefused","http://bookstack/login"]
+    command: ["--ipv4","--retry", "15","--retry-delay","5","--retry-connrefused","http://bookstack:8080/login"]
     depends_on:
     - bookstack
   mysql:
