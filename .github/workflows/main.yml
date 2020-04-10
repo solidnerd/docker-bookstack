@@ -1,0 +1,35 @@
+name: Build and push Docker image
+
+on:
+  push:
+    branches:
+      - master
+    tags:
+      - '*'
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build Image
+      uses: docker/build-push-action@v1
+      with:
+        repository: solidnerd/bookstack-dev
+        push: false
+        tag_with_sha: true
+        add_git_labels: true
+    - name: Execute End-to-End Test
+      run: make e2e
+    - name: Build and Push
+      uses: docker/build-push-action@v1
+      with:
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
+        repository: solidnerd/bookstack
+        tag_with_ref: true
+        add_git_labels: true

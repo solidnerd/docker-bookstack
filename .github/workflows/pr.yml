@@ -1,0 +1,23 @@
+name: Build and Test
+
+on:
+  pull_request:
+
+env:
+  DOCKER_BUILDKIT: 1
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Build Image
+      uses: docker/build-push-action@v1
+      with:
+        repository: solidnerd/bookstack-dev
+        push: false
+        tag_with_sha: true
+        add_git_labels: true
+    - name: Execute End-to-End Test
+      run: make e2e
