@@ -61,8 +61,8 @@ if [ ! -f ".env" ]; then
       MAIL_DRIVER=${MAIL_DRIVER:-smtp}
 
       # Mail sending options
-      MAIL_FROM=${MAIL_FROM=:-mail@bookstackapp.com}
-      MAIL_FROM_NAME=${MAIL_FROM_NAME=:-BookStack}
+      MAIL_FROM=${MAIL_FROM:-mail@bookstackapp.com}
+      MAIL_FROM_NAME=${MAIL_FROM_NAME:-BookStack}
 
       # SMTP mail options
       MAIL_HOST=${MAIL_HOST:-localhost}
@@ -222,9 +222,9 @@ if [ ! -f ".env" ]; then
 
       # SAML group sync configuration
       # Refer to https://www.bookstackapp.com/docs/admin/saml2-auth/
-      SAML2_USER_TO_GROUPS=${SAML2_USER_TO_GROUPS=:-false}
-      SAML2_GROUP_ATTRIBUTE=${SAML2_GROUP_ATTRIBUTE=:-group}
-      SAML2_REMOVE_FROM_GROUPS=${SAML2_REMOVE_FROM_GROUPS=:-false}
+      SAML2_USER_TO_GROUPS=${SAML2_USER_TO_GROUPS:-false}
+      SAML2_GROUP_ATTRIBUTE=${SAML2_GROUP_ATTRIBUTE:-group}
+      SAML2_REMOVE_FROM_GROUPS=${SAML2_REMOVE_FROM_GROUPS:-false}
 
       # Disable default third-party services such as Gravatar and Draw.IO
       # Service-specific options will override this option
