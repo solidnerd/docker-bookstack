@@ -10,9 +10,9 @@ DB_PORT=${DB_PORT:-3306}
 if [ ! -f ".env" ]; then
   if [[ "${DB_HOST}" ]]; then
   cat > ".env" <<EOF
-      # Application environment
+ # Application environment
       # Can be 'production', 'development', 'testing' or 'demo'
-      APP_ENV=${:-production}
+      APP_ENV=${APP_ENV:-production}
 
       # Enable debug mode
       # Shows advanced debug information and errors.
@@ -73,9 +73,9 @@ if [ ! -f ".env" ]; then
 
       # Cache & Session driver to use
       # Can be 'file', 'database', 'memcached' or 'redis'
-      CACHE_DRIVER=file
-      SESSION_DRIVER=file
-      QUEUE_DRIVER=sync
+      CACHE_DRIVER=${CACHE_DRIVER:-file}
+      SESSION_DRIVER=${SESSION_DRIVER:-file}
+      QUEUE_DRIVER=${QUEUE_DRIVER:-sync}
 
       # Memcached server configuration
       # If using a UNIX socket path for the host, set the port to 0
