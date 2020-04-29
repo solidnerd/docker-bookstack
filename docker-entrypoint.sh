@@ -60,9 +60,9 @@ if [ ! -f ".env" ]; then
       # Can be 'smtp', 'mail' or 'sendmail'
       MAIL_DRIVER=${MAIL_DRIVER:-smtp}
 
-      # Mail sending options
-      MAIL_FROM=${MAIL_FROM:-mail@bookstackapp.com}
-      MAIL_FROM_NAME=${MAIL_FROM_NAME:-BookStack}
+      # # Mail sending options
+      # MAIL_FROM=${MAIL_FROM:-mail@bookstackapp.com}
+      # MAIL_FROM_NAME=${MAIL_FROM_NAME:-BookStack}
 
       # SMTP mail options
       MAIL_HOST=${MAIL_HOST:-localhost}
@@ -116,7 +116,7 @@ if [ ! -f ".env" ]; then
 
       # S3 endpoint to use for storage calls
       # Only set this if using a non-Amazon s3-compatible service such as Minio
-      #STORAGE_S3_ENDPOINT=${STORAGE_S3_ENDPOINT:-}
+      # STORAGE_S3_ENDPOINT=${STORAGE_S3_ENDPOINT:-}
 
       # Storage URL prefix
       # Used as a base for any generated image urls.
@@ -234,7 +234,7 @@ if [ ! -f ".env" ]; then
       # Possible placeholders: ${hash} ${size} ${email}
       # If set, Avatars will be fetched regardless of DISABLE_EXTERNAL_SERVICES option.
       # Example: AVATAR_URL=https://seccdn.libravatar.org/avatar/${hash}?s=${size}&d=identicon
-      #AVATAR_URL=${AVATAR_URL:-}
+      # AVATAR_URL=${AVATAR_URL:-}
 
       # Enable draw.io integration
       # Can simply be true/false to enable/disable the integration.
@@ -269,6 +269,7 @@ if [ ! -f ".env" ]; then
 
       # The number of API requests that can be made per minute by a single user.
       API_REQUESTS_PER_MIN=${API_REQUESTS_PER_MIN:-180}
+
 
 EOF
     else
