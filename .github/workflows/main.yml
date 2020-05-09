@@ -33,9 +33,3 @@ jobs:
         repository: solidnerd/bookstack
         tag_with_ref: true
         add_git_labels: true
-    - name: Docker Hub Description
-      uses: peter-evans/dockerhub-description@v2
-      env:
-        DOCKERHUB_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-        DOCKERHUB_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
-        DOCKERHUB_REPOSITORY: solidnerd/bookstack
