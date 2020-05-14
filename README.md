@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/solidnerd/docker-bookstack.svg?branch=master)](https://travis-ci.org/solidnerd/docker-bookstack) [![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own license badge on microbadger.com")
 
-## Current Version: [0.29.2](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [0.29.3](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
 
