@@ -13,7 +13,7 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
     - name: Build Image
-      uses: docker/build-push-action@v1
+      uses: docker/build-push-action@v2
       with:
         repository: solidnerd/bookstack-dev
         push: false
