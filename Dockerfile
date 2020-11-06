@@ -1,5 +1,5 @@
 FROM alpine:3 as bookstack
-ENV BOOKSTACK_VERSION=0.29.3
+ENV BOOKSTACK_VERSION=0.30.2
 RUN apk add --no-cache curl tar
 RUN set -x; \
     curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz  \
@@ -32,7 +32,7 @@ RUN set -x; \
    && docker-php-ext-configure ldap \
    && docker-php-ext-install -j$(nproc) ldap \
    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
-   && docker-php-ext-install -j$(nproc) gd 
+   && docker-php-ext-install -j$(nproc) gd
 
 RUN a2enmod rewrite remoteip; \
     { \
@@ -45,7 +45,7 @@ RUN a2enmod rewrite remoteip; \
 
 RUN set -ex; \
     sed -i "s/Listen 80/Listen 8080/" /etc/apache2/ports.conf; \
-    sed -i "s/VirtualHost *:80/VirtualHost *:8080/" /etc/apache2/sites-available/*.conf 
+    sed -i "s/VirtualHost *:80/VirtualHost *:8080/" /etc/apache2/sites-available/*.conf
 
 COPY bookstack.conf /etc/apache2/sites-available/000-default.conf
 
