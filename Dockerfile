@@ -51,9 +51,10 @@ COPY bookstack.conf /etc/apache2/sites-available/000-default.conf
 
 COPY --from=bookstack --chown=33:33 /bookstack/ /var/www/bookstack/
 
+ARG COMPOSER_VERSION=1.10.16
 RUN set -x; \
     cd /var/www/bookstack \
-    && curl -sS https://getcomposer.org/installer | php \
+    && curl -sS https://getcomposer.org/installer | php -- --version=$COMPOSER_VERSION \
     && /var/www/bookstack/composer.phar global -v require hirak/prestissimo \
     && /var/www/bookstack/composer.phar install -v -d /var/www/bookstack/ \
     && /var/www/bookstack/composer.phar global -v remove hirak/prestissimo \
