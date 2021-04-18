@@ -1,10 +1,10 @@
-DOCKER_RELEASE_REG=solidnerd
+DOCKER_RELEASE_REG=digitalmotion
 DOCKER_IMAGE=bookstack
 DOCKER_IMAGE_DEV=${DOCKER_IMAGE}-dev
 DOCKER_INTERNAL_TAG := "sha-$(shell git rev-parse --short HEAD)"
 DOCKER_RELEASE_TAG := $(shell git describe)
 BUILD_DATE := $(shell date -u +"%Y-%m-%dT%H:%M:%SZ")
-VCS_URL := https://github.com/solidnerd/docker-bookstack
+VCS_URL := https://github.com/DigitalMotionTech/docker-bookstack
 
 .PHONY: build  push pull release
 

@@ -1,5 +1,5 @@
 FROM alpine:3 as bookstack
-ENV BOOKSTACK_VERSION=0.31.6
+ENV BOOKSTACK_VERSION=21.04
 RUN apk add --no-cache curl tar
 RUN set -x; \
     curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz  \
@@ -61,7 +61,7 @@ RUN set -x; \
     && rm -rf /var/www/bookstack/composer.phar /root/.composer \
     && chown -R www-data:www-data /var/www/bookstack
 
-COPY php.ini /usr/local/etc/php/php.ini
+COPY php.ini /usr/local/etc/php/conf.d/docker-bookstack-default.ini
 COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
 
 WORKDIR /var/www/bookstack
@@ -84,8 +84,8 @@ LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile" \
       org.label-schema.license="MIT" \
       org.label-schema.name="bookstack" \
-      org.label-schema.vendor="solidnerd" \
-      org.label-schema.url="https://github.com/solidnerd/docker-bookstack/" \
+      org.label-schema.vendor="digitalmotion" \
+      org.label-schema.url="https://github.com/DigitalMotionTech/docker-bookstack/" \
       org.label-schema.vcs-ref=$VCS_REF \
-      org.label-schema.vcs-url="https://github.com/solidnerd/docker-bookstack.git" \
+      org.label-schema.vcs-url="https://github.com/DigitalMotionTech/docker-bookstack.git" \
       org.label-schema.vcs-type="Git"

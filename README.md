@@ -1,8 +1,8 @@
-## Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
+## Docker Image For [BookStack] (https://github.com/ssddanbrown/BookStack)
 
-[![Build Status](https://travis-ci.org/solidnerd/docker-bookstack.svg?branch=master)](https://travis-ci.org/solidnerd/docker-bookstack) [![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own license badge on microbadger.com")
+[![Build Status](https://travis-ci.org/DigitalMotionTech/docker-bookstack.svg?branch=master)](https://travis-ci.org/DigitalMotionTech/docker-bookstack) [![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/DigitalMotionTech/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/DigitalMotionTech/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own license badge on microbadger.com")
 
-## Current Version: [0.31.6](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [21.04](https://github.com/DigitalMotionTech/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
 
@@ -21,7 +21,7 @@ and after that open your Browser and go to [http://localhost:8080](http://localh
 
 ### Issues
 
-If you have any issues feel free to create an [issue on GitHub](https://github.com/solidnerd/docker-bookstack/issues).
+If you have any issues feel free to create an [issue on GitHub](https://github.com/DigitalMotionTech/docker-bookstack/issues).
 
 
 ### How to use the Image without Docker compose
@@ -100,4 +100,4 @@ After these steps you can visit [http://localhost:8080](http://localhost:8080) .
 
 ### Inspiration
 
-This is a fork of [Kilhog/docker-bookstack](https://github.com/Kilhog/docker-bookstack). Kilhog did the intial work, but I want to go in a different direction.
+This is a fork of [solidnerd/docker-bookstack](https://github.com/solidnert/docker-bookstack).
