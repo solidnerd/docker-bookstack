@@ -15,7 +15,7 @@ jobs:
       id: docker_meta_ci
       uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: solidnerd/bookstack-dev
+        images: digitalmotion/bookstack-dev
         tag-sha: true
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v1
@@ -29,7 +29,7 @@ jobs:
         tags: |
           ${{ steps.docker_meta_ci.outputs.tags }}
         labels: ${{ steps.docker_meta_ci.outputs.labels }}
-        cache-from: type=registry,ref=solidnerd/bookstack-dev:master
+        cache-from: type=registry,ref=digitalmotion/bookstack-dev:master
         cache-to: type=inline
         outputs: type=docker,dest=/tmp/image-bookstack.tar
     - name: Upload artifact

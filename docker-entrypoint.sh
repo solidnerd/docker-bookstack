@@ -102,6 +102,10 @@ else
   echoerr "wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}"
 fi
 
+if [ ! -z $MAX_UPLOAD_SIZE ]; then
+  echo -e "[PHP]\npost_max_size = ${MAX_UPLOAD_SIZE}\nupload_max_filesize = ${MAX_UPLOAD_SIZE}\n" > /usr/local/etc/php/conf.d/zbookstack-max-upload.ini
+fi
+
 echo "Generating Key..."
 php artisan key:generate --show
 
