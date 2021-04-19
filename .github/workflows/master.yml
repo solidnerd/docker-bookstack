@@ -91,8 +91,8 @@ jobs:
       uses: docker/login-action@v1 
       with:
         registry: ghcr.io
-        username: ${{ github.repository_owner }}
-        password: ${{ secrets.CR_PAT }}
+        username: ${{ GITHUB_ACTOR }}
+        password: ${{ secrets.CR_PATH }}
     - name: Build and Push
       uses: docker/build-push-action@v2
       with:
