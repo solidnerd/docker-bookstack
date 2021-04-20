@@ -103,5 +103,5 @@ jobs:
         tags: |
           ${{ steps.docker_meta.outputs.tags }}
         labels: ${{ steps.docker_meta.outputs.labels }}
-        cache-from: type=registry,ref=digitalmotion/bookstack-dev:${{ github.sha }}
-        cache-to: type=registry,ref=digitalmotion/bookstack-dev:${{ github.sha }}
+        cache-from: type=registry,ref=digitalmotiontech/bookstack-dev:${{ github.sha }}
+        cache-to: type=registry,ref=digitalmotiontech/bookstack-dev:${{ github.sha }}
