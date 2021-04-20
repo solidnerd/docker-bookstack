@@ -62,7 +62,7 @@ jobs:
       id: docker_meta
       uses: crazy-max/ghaction-docker-meta@v1
       with:
-        images: digitalmotion/bookstack,ghcr.io/digitalmotiontech/docker-bookstack
+        images: digitalmotion/bookstack,docker.pkg.github.com/digitalmotiontech/docker-bookstack
         tag-semver: |
           {{version}}
           {{major}}.{{minor}}
@@ -103,5 +103,5 @@ jobs:
         tags: |
           ${{ steps.docker_meta.outputs.tags }}
         labels: ${{ steps.docker_meta.outputs.labels }}
-        cache-from: type=registry,ref=digitalmotiontech/bookstack-dev:${{ github.sha }}
-        cache-to: type=registry,ref=digitalmotiontech/bookstack-dev:${{ github.sha }}
+        cache-from: type=registry,ref=digitalmotion/bookstack-dev:${{ github.sha }}
+        cache-to: type=registry,ref=digitalmotion/bookstack-dev:${{ github.sha }}
