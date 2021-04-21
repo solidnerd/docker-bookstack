@@ -57,7 +57,7 @@ jobs:
     needs: e2e
     permissions:
       packages: write
-      content: read
+      contents: read
     steps:
     - name: Checkout
       uses: actions/checkout@v2
