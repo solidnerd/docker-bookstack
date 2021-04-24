@@ -3,8 +3,14 @@ stages:
 - test
 - image
 
+image: docker:19-git
+
 build:
   stage: build
+  tags:
+    - docker
+  services:
+    - docker:19-dind
   before_script:
     - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
   script:
@@ -16,6 +22,10 @@ build:
 
 release:
   stage: image
+  tags:
+    - docker
+  services:
+    - docker:19-dind
   before_script:
     - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
     - echo $DH_PASSWORD | docker login -u $DH_USERNAME --password-stdin
