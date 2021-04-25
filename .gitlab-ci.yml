@@ -14,7 +14,7 @@ build:
   before_script:
     - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
   script:
-    - docker build -t $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME .
+    - docker build --build-arg VCS_REF="$CI_COMMIT_SHA" --build-arg BUILD_DATE="$CI_JOB_STARTED_AT" $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME .
     - docker push $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
     - docker rmi $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
   after_script:

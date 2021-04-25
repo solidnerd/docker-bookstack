@@ -51,6 +51,10 @@ COPY bookstack.conf /etc/apache2/sites-available/000-default.conf
 
 COPY --from=bookstack --chown=33:33 /bookstack/ /var/www/bookstack/
 
+COPY php.ini /usr/local/etc/php/conf.d/docker-bookstack-default.ini
+
+COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
+
 ARG COMPOSER_VERSION=1.10.16
 RUN set -x; \
     cd /var/www/bookstack \
@@ -59,10 +63,7 @@ RUN set -x; \
     && /var/www/bookstack/composer.phar install -v -d /var/www/bookstack/ \
     && /var/www/bookstack/composer.phar global -v remove hirak/prestissimo \
     && rm -rf /var/www/bookstack/composer.phar /root/.composer \
-    && chown -R www-data:www-data /var/www/bookstack
-
-COPY php.ini /usr/local/etc/php/conf.d/docker-bookstack-default.ini
-COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
+    && chown -R www-data:www-data /usr/local/etc/php/conf.d/ /var/www/bookstack
 
 WORKDIR /var/www/bookstack
 
