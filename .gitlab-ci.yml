@@ -2,26 +2,46 @@ stages:
 - build
 - test
 - image
+
+image: docker:19-git
+
 build:
   stage: build
+  tags:
+    - docker
+  services:
+    - docker:19-dind
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
   script:
-    - docker build -t $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME .
+    - docker build --build-arg VCS_REF="$CI_COMMIT_SHA" --build-arg BUILD_DATE="$CI_JOB_STARTED_AT" --tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME .
     - docker push $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
     - docker rmi $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+  after_script:
+    - docker logout $CI_REGISTRY
 
 release:
   stage: image
+  tags:
+    - docker
+  services:
+    - docker:19-dind
   before_script:
-    - docker login -u gitlab-ci-token -p $CI_BUILD_TOKEN $CI_REGISTRY
+    - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+    - echo $DH_PASSWORD | docker login -u $DH_USERNAME --password-stdin
   script:
     - docker pull $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
     - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME $CI_REGISTRY_IMAGE:$(cat VERSION)
-    - docker push $CI_REGISTRY_IMAGE:$(cat VERSION)
-    - docker rmi $CI_REGISTRY_IMAGE:$(cat VERSION)
+    - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME $DH_REGISTRY_IMAGE:$(cat VERSION)
     - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME $CI_REGISTRY_IMAGE:latest
+    - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME $DH_REGISTRY_IMAGE:latest
+    - docker push $CI_REGISTRY_IMAGE:$(cat VERSION)
+    - docker push $DH_REGISTRY_IMAGE:$(cat VERSION)
     - docker push $CI_REGISTRY_IMAGE:latest
+    - docker push $DH_REGISTRY_IMAGE:latest
+    - docker rmi $CI_REGISTRY_IMAGE:$(cat VERSION)
+    - docker rmi $DH_REGISTRY_IMAGE:$(cat VERSION)
     - docker rmi $CI_REGISTRY_IMAGE:latest
+    - docker rmi $DH_REGISTRY_IMAGE:latest
   only:
-    - master
+    - tags
