@@ -20,6 +20,7 @@ build:
       /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile
       --destination $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
       --build-arg VCS_REF="$CI_COMMIT_SHA" --build-arg BUILD_DATE="$CI_JOB_STARTED_AT"
+      --cache --cache-dir=/cache --cache-repo=${CI_REGISTRY_IMAGE}/testing
   after_script:
     - rm -f /kaniko/.docker/config.json
 

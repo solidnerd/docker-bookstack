@@ -55,20 +55,20 @@ COPY php.ini /usr/local/etc/php/conf.d/docker-bookstack-default.ini
 
 COPY docker-entrypoint.sh /bin/docker-entrypoint.sh
 
+RUN cd /var/www/bookstack \
+    && mkdir /var/www/.composer \
+    && chown -R www-data:www-data /usr/local/etc/php/conf.d/ /var/www/bookstack /var/www/.composer 
+
+# www-data
+USER 33
+
 ARG COMPOSER_VERSION=2.0.14
 RUN set -x; \
     cd /var/www/bookstack \
     && curl -sS https://getcomposer.org/installer | php -- --version=$COMPOSER_VERSION \
-    && /var/www/bookstack/composer.phar global -v require hirak/prestissimo \
-    && /var/www/bookstack/composer.phar install -v -d /var/www/bookstack/ \
-    && /var/www/bookstack/composer.phar global -v remove hirak/prestissimo \
-    && rm -rf /var/www/bookstack/composer.phar /root/.composer \
-    && chown -R www-data:www-data /usr/local/etc/php/conf.d/ /var/www/bookstack
+    && /var/www/bookstack/composer.phar install -v -d /var/www/bookstack/ 
 
 WORKDIR /var/www/bookstack
-
-# www-data
-USER 33
 
 VOLUME ["/var/www/bookstack/public/uploads","/var/www/bookstack/storage/uploads"]
 
