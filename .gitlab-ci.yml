@@ -9,16 +9,16 @@ build:
   stage: build
   tags:
     - docker
-  services:
-    - docker:19-dind
   before_script:
-    - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
+    - mkdir -p /kaniko/.docker
+    - echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"}}}" > /kaniko/.docker/config.json
   script:
-    - docker build --build-arg VCS_REF="$CI_COMMIT_SHA" --build-arg BUILD_DATE="$CI_JOB_STARTED_AT" --tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME .
-    - docker push $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
-    - docker rmi $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+    - >
+      /kaniko/executor --context $CI_PROJECT_DIR --dockerfile $CI_PROJECT_DIR/Dockerfile
+      --destination $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
+      --build-arg VCS_REF="$CI_COMMIT_SHA" --build-arg BUILD_DATE="$CI_JOB_STARTED_AT"
   after_script:
-    - docker logout $CI_REGISTRY
+    - rm -f /kaniko/.docker/config.json
 
 release:
   stage: image
