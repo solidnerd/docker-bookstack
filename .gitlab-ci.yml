@@ -7,6 +7,9 @@ image: docker:19-git
 
 build:
   stage: build
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
   tags:
     - docker
   before_script:
