@@ -32,8 +32,11 @@ release:
   services:
     - docker:19-dind
   before_script:
-    - echo $CI_BUILD_TOKEN | docker login -u gitlab-ci-token --password-stdin $CI_REGISTRY
-    - echo $DH_PASSWORD | docker login -u $DH_USERNAME --password-stdin
+    - mkdir -p /root/.docker/config.json
+    - $DH_AUTH=$(echo -n "${DH_USERNAME}:${DH_PASSWORD}" | base64)
+    - >
+      echo "{\"auths\":{\"$CI_REGISTRY\":{\"username\":\"$CI_REGISTRY_USER\",\"password\":\"$CI_REGISTRY_PASSWORD\"},
+      \"https://index.docker.io/v1/\":{\"auth\":\"$DH_AUTH\"}}}" > /root/.docker/config.json
   script:
     - docker pull $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME
     - docker tag $CI_REGISTRY_IMAGE:$CI_BUILD_REF_NAME $CI_REGISTRY_IMAGE:$(cat VERSION)
@@ -48,5 +51,7 @@ release:
     - docker rmi $DH_REGISTRY_IMAGE:$(cat VERSION)
     - docker rmi $CI_REGISTRY_IMAGE:latest
     - docker rmi $DH_REGISTRY_IMAGE:latest
+  after_script:
+    - rm -f /root/.docker/config.json
   only:
     - tags
