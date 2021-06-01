@@ -1,11 +1,9 @@
 ## Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
-
-[![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/DigitalMotionTech/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/DigitalMotionTech/bookstack.svg)](https://microbadger.com/images/DigitalMotionTech/bookstack "Get your own license badge on microbadger.com")
-
-## Current Version: [21.04](https://github.com/DigitalMotionTech/docker-bookstack/blob/master/Dockerfile)
+[![Pipeline Status](https://gitlab.com/DigitalMotion/os/docker-bookstack/badges/master/pipeline.svg)](https://gitlab.com/DigitalMotion/os/docker-bookstack/-/pipelines)
+## Current Version: [21.05](https://github.com/DigitalMotionTech/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
-
+In 21.05 we moved to composer 2.x and did alot of code and build cleanup - moving image creation over to Kaniko.
 In 0.28.0 we changed the container http port from 80 to 8080 to allow root privileges to be dropped
 In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like `DB_HOST=mysql:3306`
 
