@@ -1,5 +1,14 @@
+ARG BOOKSTACK_VERSION=21.05
+ARG COMPOSER_VERSION=2.0.14
+ARG BUILD_DATE
+ARG VCS_REF
+
+# Container used to get the bookstack code and extract it
 FROM alpine:3 as bookstack
-ENV BOOKSTACK_VERSION=21.05
+# Renew needed ARGS
+ARG BOOKSTACK_VERSION
+# Setup needed environment variables
+ENV BOOKSTACK_VERSION=${BOOKSTACK_VERSION}}
 RUN apk add --no-cache curl tar
 RUN set -x; \
     curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz  \
@@ -7,7 +16,17 @@ RUN set -x; \
     && tar xvf bookstack.tar.gz -C /bookstack --strip-components=1 \
     && rm bookstack.tar.gz
 
+# Actual container used for running bookstack
 FROM php:7.4-apache-buster as final
+# Renew our ARGS
+ARG BOOKSTACK_VERSION
+ARG COMPOSER_VERSION
+ARG BUILD_DATE
+ARG VCS_REF
+# Setup our ENVS
+ENV BOOKSTACK_VERSION=${BOOKSTACK_VERSION}}
+ENV COMPOSER_VERSION=${COMPOSER_VERSION}}
+
 RUN set -x; \
     apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -62,7 +81,6 @@ RUN cd /var/www/bookstack \
 # www-data
 USER 33
 
-ARG COMPOSER_VERSION=2.0.14
 RUN set -x; \
     cd /var/www/bookstack \
     && curl -sS https://getcomposer.org/installer | php -- --version=$COMPOSER_VERSION \
@@ -79,8 +97,6 @@ EXPOSE 8080
 
 ENTRYPOINT ["/bin/docker-entrypoint.sh"]
 
-ARG BUILD_DATE
-ARG VCS_REF
 LABEL org.label-schema.build-date=$BUILD_DATE \
       org.label-schema.docker.dockerfile="/Dockerfile" \
       org.label-schema.license="MIT" \
