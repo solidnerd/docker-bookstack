@@ -19,6 +19,8 @@ services:
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
+    #set the APP_ to the URL of bookstack without without a trailing slash APP_URL=https://example.com
+    - APP_URL=http://example.com
     volumes:
     - uploads:/var/www/bookstack/public/uploads
     - storage-uploads:/var/www/bookstack/storage/uploads
