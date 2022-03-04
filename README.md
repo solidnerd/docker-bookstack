@@ -90,6 +90,34 @@ docker run -d --net bookstack_nw \
 The APP_URL parameter should be the base URL for your BookStack instance without a trailing slash. For example:
 APP_URL=http://example.com
 
+#### `docker-compose` file for localhost
+
+```docker
+version: "2"
+services:
+  bookstack_db:
+    image: mysql:5.7
+    container_name: bookstack_db
+    environment:
+      - MYSQL_ROOT_PASSWORD=secret
+      - MYSQL_DATABASE=bookstack
+      - MYSQL_USER=bookstack
+      - MYSQL_PASSWORD=bookstack
+
+  bookstack:
+    image: solidnerd/bookstack:21.12.1
+    environment:
+      - DB_HOST=bookstack_db
+      - DB_DATABASE=bookstack
+      - DB_USER=bookstack
+      - DB_PASSWORD=bookstack
+      - APP_URL=http://localhost:6544
+    ports:
+      - 6544:8080
+    depends_on:
+      - bookstack_db
+```
+
 #### Volumes
 To access your `.env` file and important bookstack folders on your host system change `<HOST>` in the following line to your host directory and add it then to your run command:
 
