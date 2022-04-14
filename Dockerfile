@@ -22,17 +22,20 @@ RUN set -x; \
         libxml2-dev  \
         fontconfig  \
         fonts-freefont-ttf   \
-        wkhtmltopdf  \
+        wget \
         tar \
         curl \
         libzip-dev \
         unzip \
-    \
-   && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
-   && docker-php-ext-configure ldap \
-   && docker-php-ext-install -j$(nproc) ldap \
-   && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
-   && docker-php-ext-install -j$(nproc) gd
+	&& wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb \
+	&& chmod a+x ./wkhtmltox_0.12.6-1.buster_amd64.deb \
+    && apt-get install -y ./wkhtmltox_0.12.6-1.buster_amd64.deb \
+    && rm ./wkhtmltox_0.12.6-1.buster_amd64.deb \
+    && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
+    && docker-php-ext-configure ldap \
+    && docker-php-ext-install -j$(nproc) ldap \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-install -j$(nproc) gd
 
 RUN a2enmod rewrite remoteip; \
     { \
