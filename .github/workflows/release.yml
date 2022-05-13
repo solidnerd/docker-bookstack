@@ -32,7 +32,7 @@ jobs:
         cache-from: type=registry,ref=solidnerd/bookstack-dev:master
         outputs: type=docker,dest=/tmp/image-bookstack.tar
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: image-bookstack-master
         path: /tmp/image-bookstack.tar
