@@ -77,6 +77,8 @@ jobs:
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}.{{minor}}.{{patch}}
+          # Get "master" for master-branch changes
+          type=ref,event=branch
 
     - name: Download artifact
       uses: actions/download-artifact@v3
