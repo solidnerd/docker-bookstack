@@ -11,14 +11,17 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
     - name: Set up CI Image Metadata
       id: docker_meta_ci
       uses: crazy-max/ghaction-docker-meta@v1
       with:
         images: solidnerd/bookstack-dev
         tag-sha: true
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
+
     - name: Build Image
       uses: docker/build-push-action@v3
       with:
@@ -31,33 +34,39 @@ jobs:
         labels: ${{ steps.docker_meta_ci.outputs.labels }}
         cache-from: type=registry,ref=solidnerd/bookstack-dev:master
         outputs: type=docker,dest=/tmp/image-bookstack.tar
+
     - name: Upload artifact
       uses: actions/upload-artifact@v3
       with:
         name: image-bookstack-master
         path: /tmp/image-bookstack.tar
         if-no-files-found: warn
+
   e2e:
     runs-on: ubuntu-latest
     needs: build
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
         name: image-bookstack-master
         path: /tmp
+
     - name: Load Docker image
       run: |
         docker load --input /tmp/image-bookstack.tar
         docker image ls -a
+
   push:
     runs-on: ubuntu-20.04
     needs: e2e
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+
     - name:  Set up Docker Hub Image Metadata
       id: docker_meta
       uses: crazy-max/ghaction-docker-meta@v1
@@ -67,6 +76,7 @@ jobs:
           {{version}}
           {{major}}.{{minor}}
           {{major}}.{{minor}}.{{patch}}
+
     - name: Download artifact
       uses: actions/download-artifact@v3
       with:
@@ -77,22 +87,27 @@ jobs:
       run: |
         docker load --input /tmp/image-bookstack.tar
         docker image ls -a
+
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v2
+
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
+
     - name: Login to DockerHub
       if: github.event_name != 'pull_request'
       uses: docker/login-action@v2
       with:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
+
     - name: Login to GitHub Container Registry
-      uses: docker/login-action@v2 
+      uses: docker/login-action@v2
       with:
         registry: ghcr.io
         username: ${{ github.repository_owner }}
         password: ${{ secrets.CR_PAT }}
+
     - name: Build and Push
       uses: docker/build-push-action@v3
       with:
