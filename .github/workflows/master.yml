@@ -14,10 +14,11 @@ jobs:
 
     - name: Set up CI Image Metadata
       id: docker_meta_ci
-      uses: crazy-max/ghaction-docker-meta@v1
+      uses: docker/metadata-action@v4
       with:
         images: solidnerd/bookstack-dev
-        tag-sha: true
+        tags: |
+          type=sha
 
     - name: Set up Docker Buildx
       uses: docker/setup-buildx-action@v2
@@ -69,13 +70,13 @@ jobs:
 
     - name:  Set up Docker Hub Image Metadata
       id: docker_meta
-      uses: crazy-max/ghaction-docker-meta@v1
+      uses: docker/metadata-action@v4
       with:
         images: solidnerd/bookstack,ghcr.io/solidnerd/docker-bookstack
-        tag-semver: |
-          {{version}}
-          {{major}}.{{minor}}
-          {{major}}.{{minor}}.{{patch}}
+        tags: |
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}.{{minor}}.{{patch}}
 
     - name: Download artifact
       uses: actions/download-artifact@v3
