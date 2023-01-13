@@ -1,0 +1,36 @@
+version: '2'
+services:
+  mysql:
+    image: mysql:8.0
+    environment:
+    - MYSQL_ROOT_PASSWORD=somepassword
+    - MYSQL_DATABASE=bookstack
+    - MYSQL_USER=bookstack
+    - MYSQL_PASSWORD=somepassword
+    volumes:
+    - mysql-data:/var/lib/mysql
+    restart: always
+  bookstack:
+    image: bookstack:latest
+    depends_on:
+    - mysql
+    environment:
+    - DB_HOST=mysql:3306
+    - DB_DATABASE=bookstack
+    - DB_USERNAME=bookstack
+    - DB_PASSWORD=somepassword
+    #set the APP_ to the URL of bookstack without without a trailing slash APP_URL=https://example.com
+    - APP_URL=http://my.url.me
+    build: 
+      context: .
+      dockerfile: ./Dockerfile.arm64
+    volumes:
+    - uploads:/var/www/bookstack/public/uploads
+    - storage-uploads:/var/www/bookstack/storage/uploads
+    ports:
+    - "80:8080"
+    restart: always
+volumes:
+ mysql-data:
+ uploads:
+ storage-uploads:
