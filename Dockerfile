@@ -1,4 +1,4 @@
-FROM alpine:3 as bookstack
+FROM alpine:20230208 as bookstack
 ENV BOOKSTACK_VERSION=23.01.1
 RUN apk add --no-cache curl tar
 RUN set -x; \
