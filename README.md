@@ -2,7 +2,7 @@
 
 [![Build Status](https://travis-ci.org/solidnerd/docker-bookstack.svg?branch=master)](https://travis-ci.org/solidnerd/docker-bookstack) [![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own license badge on microbadger.com")
 
-## Current Version: [23.2.0](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [23.2.1](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
 
@@ -49,8 +49,8 @@ mysql:5.7.21
 ```bash
 docker run -d --link bookstack_db_:mysql \
 -p 8080:8080 \
---name bookstack_23.2.0 \
-solidnerd/bookstack:23.2.0
+--name bookstack_23.2.1 \
+solidnerd/bookstack:23.2.1
 ```
 
 #### Docker 1.9+
@@ -83,8 +83,8 @@ docker run -d --net bookstack_nw \
 -e DB_PASSWORD=secret \
 -e APP_URL=http://example.com \
 -p 8080:8080 \
---name="bookstack_23.2.0" \
- solidnerd/bookstack:23.2.0
+--name="bookstack_23.2.1" \
+ solidnerd/bookstack:23.2.1
 ```
 
 The APP_URL parameter should be the base URL for your BookStack instance without a trailing slash. For example:
