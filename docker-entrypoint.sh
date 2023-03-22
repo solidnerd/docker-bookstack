@@ -3,6 +3,36 @@ set -e
 
 echoerr() { echo "$@" 1>&2; }
 
+# Allow $XYZ_FILE to fill in the value of $XYZ from a file
+# (helpful for Docker's secrets feature).
+# Heavily cribbed from MariaDB.
+# usage: file_env VAR [DEFAULT]
+file_env() {
+    local var="$1"
+    local fileVar="${var}_FILE"
+    local def="${2:-}"
+    if [ "${!var:-}" ] && [ "${!fileVar:-}" ]; then
+        echo >&2 "error: Both $var and $fileVar are set, but are exclusive."
+        exit 1
+    fi
+    local val="$def"
+    if [ "${!var:-}" ]; then
+        val="${!var}"
+    elif [ "${!fileVar:-}" ]; then
+        val="$(< "${!fileVar}")"
+    fi
+    export "$var"="$val"
+    unset "$fileVar"
+}
+
+# Initialize environment variables that might be stored in a file.
+# $DB_HOST doesn't have a default value to properly trigger the
+# "DB_HOST not defined" error.
+file_env 'DB_HOST'
+file_env 'DB_DATABASE' 'bookstack'
+file_env 'DB_USERNAME' 'bookstack'
+file_env 'DB_PASSWORD' 'password'
+
 # Split out host and port from DB_HOST env variable
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
@@ -20,10 +50,10 @@ if [ ! -f ".env" ]; then
       APP_URL=${APP_URL:-null}
 
       # Database details
-      DB_HOST=${DB_HOST:-localhost}
-      DB_DATABASE=${DB_DATABASE:-bookstack}
-      DB_USERNAME=${DB_USERNAME:-bookstack}
-      DB_PASSWORD=${DB_PASSWORD:-password}
+      DB_HOST=${DB_HOST}
+      DB_DATABASE=${DB_DATABASE}
+      DB_USERNAME=${DB_USERNAME}
+      DB_PASSWORD=${DB_PASSWORD}
 
       # Cache and session
       CACHE_DRIVER=file
@@ -80,7 +110,7 @@ if [ ! -f ".env" ]; then
       # URL used for social login redirects, NO TRAILING SLASH
 EOF
     else
-        echo >&2 'error: missing DB_HOST environment variable'
+        echo >&2 'error: One of either DB_HOST or DB_HOST_FILE must be defined.'
         exit 1
     fi
 fi
