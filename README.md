@@ -6,23 +6,28 @@
 
 ### Changes
 
-In 0.28.0 we changed the container http port from 80 to 8080 to allow root privileges to be dropped
-In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like `DB_HOST=mysql:3306`
+In 0.28.0 we changed the container http port from 80 to 8080 to allow root privileges to be dropped.
+In 0.12.2 we removed `DB_PORT`. You can now specify the port via `DB_HOST` like `DB_HOST=mysql:3306`
 
 ### Quickstart
 
-With Docker Compose is a Quickstart very easy. Run the following command:
+Docker Compose is the quickest way to start using BookStack. Run the following command:
 
 ```
-docker-compose up
+docker-compose up -d
 ```
 
-and after that open your Browser and go to [http://localhost:8080](http://localhost:8080) . You can login with username 'admin@admin.com' and password 'password'.
+and after that open your Browser and go to [http://localhost:8080](http://localhost:8080). You can login with username 'admin@admin.com' and password 'password'.
 
 ### Issues
 
 If you have any issues feel free to create an [issue on GitHub](https://github.com/solidnerd/docker-bookstack/issues).
 
+### Docker Secrets
+
+When using Docker compose, certain environment variables (DB\_HOST, DB\_DATABASE, DB\_USER, and DB\_PASSWORD) may be initialized as [Docker secrets](https://docs.docker.com/compose/compose-file/09-secrets/) to prevent their exposure within the docker-compose.yml file or via `docker inspect`. First, the values for each secret must be saved as individual files. Then, the docker-compose.yml file must be modified to correctly call these secrets. An example compose file is included at docker-compose.secrets.yml. Note that the environment variables listed above have been replaced with their \*\_FILE equivalents, and a new top-level "secrets" element has been added to the end of the file.
+
+Both the MySQL and MariaDB Docker implementations also support Docker secrets. See their documentation for details.
 
 ### How to use the Image without Docker compose
 
