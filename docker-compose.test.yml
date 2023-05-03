@@ -25,6 +25,9 @@ services:
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
+    - PHP_POST_MAX_SIZE=10M
+    - PHP_UPLOAD_MAX_FILESIZE=10M
+    - PHP_MEMORY_LIMIT=128M
     volumes:
     - uploads:/var/www/bookstack/public/uploads
     - storage-uploads:/var/www/bookstack/storage/uploads

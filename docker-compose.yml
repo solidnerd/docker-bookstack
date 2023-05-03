@@ -21,6 +21,10 @@ services:
     - DB_PASSWORD=secret
     #set the APP_ to the URL of bookstack without without a trailing slash APP_URL=https://example.com
     - APP_URL=http://example.com
+    #set php.ini configuration values
+    - PHP_POST_MAX_SIZE=10M
+    - PHP_UPLOAD_MAX_FILESIZE=10M
+    - PHP_MEMORY_LIMIT=128M
     volumes:
     - uploads:/var/www/bookstack/public/uploads
     - storage-uploads:/var/www/bookstack/storage/uploads

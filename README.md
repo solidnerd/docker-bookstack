@@ -87,6 +87,22 @@ docker run -d --net bookstack_nw \
  solidnerd/bookstack:23.2.3
 ```
 
+or using non default php.ini values:
+```bash
+docker run -d --net bookstack_nw \
+-e DB_HOST=bookstack_db:3306 \
+-e DB_DATABASE=bookstack \
+-e DB_USERNAME=bookstack \
+-e DB_PASSWORD=secret \
+-e APP_URL=http://example.com \
+-e PHP_POST_MAX_SIZE=100M \
+-e PHP_UPLOAD_MAX_FILESIZE=100M \
+-e PHP_MEMORY_LIMIT=256M \
+-p 8080:8080 \
+--name="bookstack_23.2.3" \
+ solidnerd/bookstack:23.2.3
+```
+
 The APP_URL parameter should be the base URL for your BookStack instance without a trailing slash. For example:
 APP_URL=http://example.com
 
