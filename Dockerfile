@@ -7,7 +7,7 @@ RUN set -x; \
     && tar xvf bookstack.tar.gz -C /bookstack --strip-components=1 \
     && rm bookstack.tar.gz
 
-FROM php:8.2-apache-buster as final
+FROM php:8.2-apache-bookworm as final
 RUN set -x; \
     apt-get update \
     && apt-get install -y --no-install-recommends \
@@ -27,10 +27,10 @@ RUN set -x; \
         curl \
         libzip-dev \
         unzip \
-	&& wget https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6-1/wkhtmltox_0.12.6-1.buster_amd64.deb \
-	&& chmod a+x ./wkhtmltox_0.12.6-1.buster_amd64.deb \
-    && apt-get install -y ./wkhtmltox_0.12.6-1.buster_amd64.deb \
-    && rm ./wkhtmltox_0.12.6-1.buster_amd64.deb \
+    && wget -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb \
+    && chmod a+x ./wkhtmltox.deb \
+    && apt-get install -y ./wkhtmltox.deb \
+    && rm ./wkhtmltox.deb \
     && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
     && docker-php-ext-configure ldap \
     && docker-php-ext-install -j$(nproc) ldap \
