@@ -21,6 +21,10 @@ services:
     - DB_PASSWORD=secret
     #set the APP_ to the URL of bookstack without without a trailing slash APP_URL=https://example.com
     - APP_URL=http://example.com
+    # APP_KEY is used for encryption where needed, so needs to be persisted to
+    # preserve decryption abilities.
+    # Can run `php artisan key:generate` to generate a key
+    - APP_KEY=SomeRandomString
     volumes:
     - uploads:/var/www/bookstack/public/uploads
     - storage-uploads:/var/www/bookstack/storage/uploads
