@@ -3,6 +3,17 @@ set -e
 
 echoerr() { echo "$@" 1>&2; }
 
+check_vars_exist() {
+  var_names=("$@")
+
+  for var_name in "${var_names[@]}"; do
+    if [ -z "${!var_name}" ]; then
+      echoerr "error: missing ${var_name} environment variable"
+      exit 1
+    fi
+  done
+}
+
 # Split out host and port from DB_HOST env variable
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
