@@ -21,6 +21,16 @@ DB_PORT=${DB_PORT:-3306}
 # Ensure these is no local .env file
 [ -f ".env" ] && rm .env
 
+# Check a number of essential variables are set
+check_vars_exist \
+  APP_KEY \
+  APP_URL \
+  DB_DATABASE \
+  DB_HOST \
+  DB_PASSWORD \
+  DB_PORT \
+  DB_USERNAME
+
 echoerr "wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}"
 
 timeout 15 bash <<EOT
