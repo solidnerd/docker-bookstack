@@ -79,7 +79,7 @@ jobs:
         # for this project. Note that _actual_ semver build info is not used,
         # as it is discarded by almost everything that consumes SemVer (as it
         # should be).
-        flavour: |
+        flavor: |
           latest=true
         tags: |
           type=semver,pattern={{version}}
