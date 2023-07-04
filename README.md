@@ -2,12 +2,12 @@
 
 [![Build Status](https://travis-ci.org/solidnerd/docker-bookstack.svg?branch=master)](https://travis-ci.org/solidnerd/docker-bookstack) [![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own license badge on microbadger.com")
 
-## Current Version: [23.6.0-1](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+## Current Version: [23.6.0-3](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
 
 ### Changes
 
 The version 23.6.0 is broken due to a bad `.env` configuration created by the
-entrypoint script. This is fixed in version 23.6.0-1.
+entrypoint script. This is fixed in version 23.6.0-3.
 
 In 0.28.0 we changed the container http port from 80 to 8080 to allow root privileges to be dropped
 
@@ -53,8 +53,8 @@ mysql:5.7.21
 ```bash
 docker run -d --link bookstack_db_:mysql \
 -p 8080:8080 \
---name bookstack_23.6.0-1 \
-solidnerd/bookstack:23.6.0-1
+--name bookstack_23.6.0-3 \
+solidnerd/bookstack:23.6.0-3
 ```
 
 #### Docker 1.9+
@@ -87,8 +87,8 @@ docker run -d --net bookstack_nw \
 -e DB_PASSWORD=secret \
 -e APP_URL=http://example.com \
 -p 8080:8080 \
---name="bookstack_23.6.0-1" \
- solidnerd/bookstack:23.6.0-1
+--name="bookstack_23.6.0-3" \
+ solidnerd/bookstack:23.6.0-3
 ```
 
 The APP_URL parameter should be the base URL for your BookStack instance without a trailing slash. For example:
