@@ -74,6 +74,8 @@ jobs:
         images: |
           solidnerd/bookstack
           ghcr.io/solidnerd/docker-bookstack
+        flavour: |
+          latest=true
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
