@@ -74,6 +74,13 @@ jobs:
         images: |
           solidnerd/bookstack
           ghcr.io/solidnerd/docker-bookstack
+        # Blanket-enable "latest" tagging for all of the releases that make it
+        # this far, as SemVer's pre-release tag is used as a build indicator
+        # for this project. Note that _actual_ semver build info is not used,
+        # as it is discarded by almost everything that consumes SemVer (as it
+        # should be).
+        flavor: |
+          latest=true
         tags: |
           type=semver,pattern={{version}}
           type=semver,pattern={{major}}.{{minor}}
