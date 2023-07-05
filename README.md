@@ -100,6 +100,14 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
 
     `APP_URL=http://example.com`
 
+    The following environment variables are required for Bookstack to start:
+    - `APP_KEY`
+    - `APP_URL`
+    - `DB_HOST` (in the form `${hostname_or_ip_address}:${port}`)
+    - `DB_DATABASE`
+    - `DB_USERNAME`
+    - `DB_PASSWORD`
+
 ### Volumes
 
 To access your `.env` file and important bookstack folders on your host system
@@ -115,7 +123,7 @@ your run command:
 In case of a windows host machine the .env file has to be already created in the
 host directory otherwise a folder named .env will be created.
 
-After these steps you can visit [http://localhost:8080](http://localhost:8080) .
+After these steps you can visit [http://localhost:8080](http://localhost:8080).
 You can login with username `admin@admin.com` and password `password`.
 
 ## Inspiration
