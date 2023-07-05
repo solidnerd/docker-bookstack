@@ -6,6 +6,16 @@
 
 ## Changes
 
+Versions higher than 23.6.2 no longer use an in-container `.env` file for
+environment variable management. Instead, the preferred approach is to manage
+them directly with the container runtime (e.g. Docker's `-e`). This is to
+simplify troubleshooting if and when errors occur. The most important change is
+that `${APP_KEY}` is no longer provided for you, instead it is up to the
+operator to ensure this value is present. Versions prior to this supplied
+`${APP_KEY}` (with a default of `SomeRandomStringWith32Characters`. A full
+reference of available environment variables is available in the [Bookstack
+repository](https://github.com/BookStackApp/BookStack/blob/development/.env.example.complete)
+
 The version 23.6.0 is broken due to a bad `.env` configuration created by the
 entrypoint script. This is fixed in version 23.6.0-1.
 
