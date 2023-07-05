@@ -1,8 +1,8 @@
 # Docker Image For [BookStack](https://github.com/ssddanbrown/BookStack)
 
-[![Build Status](https://travis-ci.org/solidnerd/docker-bookstack.svg?branch=master)](https://travis-ci.org/solidnerd/docker-bookstack) [![](https://images.microbadger.com/badges/image/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own image badge on microbadger.com") [![](https://images.microbadger.com/badges/commit/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own commit badge on microbadger.com") [![](https://images.microbadger.com/badges/version/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own version badge on microbadger.com") [![](https://images.microbadger.com/badges/license/solidnerd/bookstack.svg)](https://microbadger.com/images/solidnerd/bookstack "Get your own license badge on microbadger.com")
-
-## Current Version: [23.6.1](https://github.com/SolidNerd/docker-bookstack/blob/master/Dockerfile)
+![Build Status](https://img.shields.io/github/actions/workflow/status/solidnerd/docker-bookstack/master.yml)
+![Latest release](https://img.shields.io/github/v/tag/solidnerd/docker-bookstack?label=Latest%20release)
+![GitHub contributors](https://img.shields.io/github/contributors/solidnerd/docker-bookstack)
 
 ## Changes
 
