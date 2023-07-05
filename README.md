@@ -7,7 +7,7 @@
 ## Changes
 
 The version 23.6.0 is broken due to a bad `.env` configuration created by the
-entrypoint script. This is fixed in version 23.6.1.
+entrypoint script. This is fixed in version 23.6.0-1.
 
 In 0.28.0 we changed the container http port from 80 to 8080 to allow root
 privileges to be dropped
