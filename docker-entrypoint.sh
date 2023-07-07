@@ -52,9 +52,6 @@ else
   echoerr "wait-for-db: timeout out after 15 seconds waiting for ${DB_HOST_NAME}:${DB_PORT}"
 fi
 
-echo "Generating Key..."
-php artisan key:generate --show
-
 echo "Starting Migration..."
 php artisan migrate --force
 
