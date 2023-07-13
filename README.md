@@ -57,8 +57,8 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    ```bash
    docker run -d --link bookstack_db_:mysql \
    -p 8080:8080 \
-   --name bookstack_23.6.1 \
-   solidnerd/bookstack:23.6.1
+   --name bookstack_23.6.2 \
+   solidnerd/bookstack:23.6.2
    ```
 
 ### Docker 1.9+
@@ -91,8 +91,8 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    -e DB_PASSWORD=secret \
    -e APP_URL=http://example.com \
    -p 8080:8080 \
-   --name="bookstack_23.6.1" \
-    solidnerd/bookstack:23.6.1
+   --name="bookstack_23.6.2" \
+    solidnerd/bookstack:23.6.2
    ```
 
     The APP_URL parameter should be the base URL for your BookStack instance without
