@@ -6,6 +6,16 @@
 
 ## Changes
 
+Versions higher than 23.6.2 no longer use an in-container `.env` file for
+environment variable management. Instead, the preferred approach is to manage
+them directly with the container runtime (e.g. Docker's `-e`). This is to
+simplify troubleshooting if and when errors occur. The most important change is
+that `${APP_KEY}` is no longer provided for you, instead it is up to the
+operator to ensure this value is present. Versions prior to this supplied
+`${APP_KEY}` (with a default of `SomeRandomStringWith32Characters`. A full
+reference of available environment variables is available in the [Bookstack
+repository](https://github.com/BookStackApp/BookStack/blob/development/.env.example.complete)
+
 The version 23.6.0 is broken due to a bad `.env` configuration created by the
 entrypoint script. This is fixed in version 23.6.0-1.
 
@@ -100,6 +110,14 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
 
     `APP_URL=http://example.com`
 
+    The following environment variables are required for Bookstack to start:
+    - `APP_KEY`
+    - `APP_URL`
+    - `DB_HOST` (in the form `${hostname_or_ip_address}:${port}`)
+    - `DB_DATABASE`
+    - `DB_USERNAME`
+    - `DB_PASSWORD`
+
 ### Volumes
 
 To access your `.env` file and important bookstack folders on your host system
@@ -115,7 +133,7 @@ your run command:
 In case of a windows host machine the .env file has to be already created in the
 host directory otherwise a folder named .env will be created.
 
-After these steps you can visit [http://localhost:8080](http://localhost:8080) .
+After these steps you can visit [http://localhost:8080](http://localhost:8080).
 You can login with username `admin@admin.com` and password `password`.
 
 ## Inspiration
