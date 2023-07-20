@@ -18,7 +18,7 @@ check_vars_exist() {
 IFS=":" read -r DB_HOST_NAME DB_PORT <<< "$DB_HOST"
 DB_PORT=${DB_PORT:-3306}
 
-# Ensure these is no local .env file
+# Ensure there is no local .env file
 if [ -f ".env" ]; then
   mv .env .env.bak
   echoerr ".env file detected - moved to .env.bak"
