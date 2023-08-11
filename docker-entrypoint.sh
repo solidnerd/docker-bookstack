@@ -35,6 +35,13 @@ check_vars_exist \
   DB_PORT \
   DB_USERNAME
 
+if [ -n "${FILE_UPLOAD_SIZE_LIMITS}" ]; then
+  echo "Note: If you're setting FILE_UPLOAD_SIZE_LIMITS to more than 10M, you"
+  echo "may also need to modify the php.ini file."
+  echo "See:"
+  echo "https://github.com/solidnerd/docker-bookstack/issues/423"
+fi
+
 echoerr "wait-for-db: waiting for ${DB_HOST_NAME}:${DB_PORT}"
 
 timeout 15 bash <<EOT
