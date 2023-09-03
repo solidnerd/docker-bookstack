@@ -6,7 +6,7 @@
 
 ## Changes
 
-Versions higher than 23.6.2 no longer use an in-container `.env` file for
+Versions higher than 23.8.1 no longer use an in-container `.env` file for
 environment variable management. Instead, the preferred approach is to manage
 them directly with the container runtime (e.g. Docker's `-e`). This is to
 simplify troubleshooting if and when errors occur. The most important change is
@@ -67,8 +67,8 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    ```bash
    docker run -d --link bookstack_db_:mysql \
    -p 8080:8080 \
-   --name bookstack_23.6.2 \
-   solidnerd/bookstack:23.6.2
+   --name bookstack_23.8.1 \
+   solidnerd/bookstack:23.8.1
    ```
 
 ### Docker 1.9+
@@ -101,8 +101,8 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    -e DB_PASSWORD=secret \
    -e APP_URL=http://example.com \
    -p 8080:8080 \
-   --name="bookstack_23.6.2" \
-    solidnerd/bookstack:23.6.2
+   --name="bookstack_23.8.1" \
+    solidnerd/bookstack:23.8.1
    ```
 
     The APP_URL parameter should be the base URL for your BookStack instance without
