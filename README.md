@@ -6,6 +6,9 @@
 
 ## Changes
 
+Users of version 24.2.3 should switch to 24.2.3-1 (or higher); a maintainer
+erroneously set image tag 24.2.3 to use 23.2.3 as the release.
+
 Versions higher than 23.6.2 no longer use an in-container `.env` file for
 environment variable management. Instead, the preferred approach is to manage
 them directly with the container runtime (e.g. Docker's `-e`). This is to
@@ -67,8 +70,8 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    ```bash
    docker run -d --link bookstack_db_:mysql \
    -p 8080:8080 \
-   --name bookstack_23.2.3 \
-   solidnerd/bookstack:23.2.3
+   --name bookstack_24.2.3 \
+   solidnerd/bookstack:24.2.3
    ```
 
 ### Docker 1.9+
@@ -101,8 +104,8 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    -e DB_PASSWORD=secret \
    -e APP_URL=http://example.com \
    -p 8080:8080 \
-   --name="bookstack_23.2.3" \
-    solidnerd/bookstack:23.2.3
+   --name="bookstack_24.2.3" \
+    solidnerd/bookstack:24.2.3
    ```
 
     The APP_URL parameter should be the base URL for your BookStack instance without
