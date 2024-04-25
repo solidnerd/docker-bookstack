@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - name: Checkout
-      uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
+      uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
     - name: Set up CI Image Metadata
       id: docker_meta_ci
@@ -47,7 +47,7 @@ jobs:
     needs: build
     steps:
     - name: Checkout
-      uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
+      uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
     - name: Download artifact
       uses: actions/download-artifact@v4
@@ -65,7 +65,7 @@ jobs:
     needs: e2e
     steps:
     - name: Checkout
-      uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
+      uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
     - name:  Set up Docker Hub Image Metadata
       id: docker_meta
@@ -136,7 +136,7 @@ jobs:
     steps:
       # To use this repository's private action, you must check out the repository
       - name: Checkout
-        uses: actions/checkout@1d96c772d19495a3b5c517cd2bc0cb401ea0529f # v4
+        uses: actions/checkout@0ad4b8fadaa221de15dcec353f45205ec38ea70b # v4
 
       - name: Generate changelog
         id: changelog
