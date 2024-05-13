@@ -9,10 +9,14 @@ It may also be useful to update documentation references at the same time.
 For Bookstack version 23.01:
 
 ```shell
-sed -i '' -e 's/22.11.1/23.1.0/g' *     # 22.11.1 was the previous version
-git commit -am "Update references to version 23.1.0" [-S]
+sed -i '' -e 's/22.11.1/23.1.0/g' Dockerfile  # 22.11.1 was the previous version
+git commit -am "feat: Update Bookstack to version 23.1.0" [-S]
+# Build and test this
 git tag [-s] -a 23.1.0 -m "Release version 23.01"
 git push --tags
+sed -i '' -e 's/22.11.1/23.1.0/g' *  # Update documentation to point to the
+newer release
+git commit -am "doc: update references to version 23.1"
 ```
 
 The workflow will then build, test, push, and release this image.
