@@ -27,10 +27,6 @@ RUN set -x; \
         curl \
         libzip-dev \
         unzip \
-    && wget -O wkhtmltox.deb https://github.com/wkhtmltopdf/packaging/releases/download/0.12.6.1-3/wkhtmltox_0.12.6.1-3.bookworm_amd64.deb \
-    && chmod a+x ./wkhtmltox.deb \
-    && apt-get install -y ./wkhtmltox.deb \
-    && rm ./wkhtmltox.deb \
     && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
     && docker-php-ext-configure ldap \
     && docker-php-ext-install -j$(nproc) ldap \
