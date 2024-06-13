@@ -1,8 +1,8 @@
 FROM alpine:3 AS bookstack
-ENV BOOKSTACK_VERSION=24.10.2
+ENV BOOKSTACK_VERSION=v24.10.2
 RUN apk add --no-cache curl tar
 RUN set -x; \
-    curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/v${BOOKSTACK_VERSION}.tar.gz  \
+    curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/${BOOKSTACK_VERSION}.tar.gz  \
     && mkdir -p /bookstack \
     && tar xvf bookstack.tar.gz -C /bookstack --strip-components=1 \
     && rm bookstack.tar.gz
