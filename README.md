@@ -33,7 +33,7 @@ In 0.12.2 we removed `DB_PORT` . You can now specify the port via `DB_HOST` like
 With Docker Compose is a Quickstart very easy. Run the following command:
 
 ```bash
-docker-compose up
+docker compose up
 ```
 
 and after that open your Browser and go to
