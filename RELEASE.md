@@ -4,6 +4,20 @@ When the version changes, a new release should be cut. To do this, push a tag
 with the [valid SemVer][semver-checker] version number as the tag.
 It may also be useful to update documentation references at the same time.
 
+## Scripts
+
+Update the Dockerfile with:
+
+```shell
+$ scripts/update_dockerfile.sh
+Fetching latest Bookstack release from GitHub API
+  % Total    % Received % Xferd  Average Speed   Time    Time     Time  Current
+                                 Dload  Upload   Total   Spent    Left  Speed
+100  3467  100  3467    0     0  18743      0 --:--:-- --:--:-- --:--:-- 18842
+Found latest version: v24.10.1
+Updating Dockerfile..
+```
+
 ## Example
 
 For Bookstack version 23.01:
