@@ -1,4 +1,4 @@
-FROM alpine:3 as bookstack
+FROM alpine:3 AS bookstack
 ENV BOOKSTACK_VERSION=24.10.1
 RUN apk add --no-cache curl tar
 RUN set -x; \
@@ -7,7 +7,7 @@ RUN set -x; \
     && tar xvf bookstack.tar.gz -C /bookstack --strip-components=1 \
     && rm bookstack.tar.gz
 
-FROM php:8.3-apache-bookworm as final
+FROM php:8.3-apache-bookworm AS final
 RUN set -x; \
     apt-get update \
     && apt-get install -y --no-install-recommends \
