@@ -25,6 +25,23 @@ echo "Tag name: ${BOOKSTACK_VERSION}"
 git tag -s -a "${BOOKSTACK_VERSION}" -m "Release version ${BOOKSTACK_VERSION}"
 git push --tags
 
-# TODO: Sort VERSION file
-# TODO: Update README version
-# TODO: Update docker-compose
+echo "Extracting old version info.."
+OLD_BS_VERSION="$(cat VERSION)"
+
+echo "Updating README and reference docker-compose.yml.."
+sed \
+  -i '' \
+  -e "s/${OLD_BS_VERSION}/${BOOKSTACK_VERSION}/g" \
+  "${GIT_ROOT}/README.md" \
+  "${GIT_ROOT}/docker-compose.yml"
+
+echo "Updating VERSION file.."
+echo "${BOOKSTACK_VERSION}" > "${GIT_ROOT}/VERSION"
+
+git add \
+  "${GIT_ROOT}/README.md" \
+  "${GIT_ROOT}/docker-compose.yml" \
+  "${GIT_ROOT}/VERSION"
+
+git commit -S -m "doc: update documentation to reference ${BOOKSTACK_VERSION}"
+git push
