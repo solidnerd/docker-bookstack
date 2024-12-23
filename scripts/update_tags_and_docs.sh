@@ -16,9 +16,14 @@ echo "Extracted version: ${BOOKSTACK_VERSION}"
 # Remove the 'v' for our tags
 BOOKSTACK_VERSION="${BOOKSTACK_VERSION/#v/}"
 # Remove leading zeros to make the version fit a SemVer-shaped hole
-BOOKSTACK_VERSION="${BOOKSTACK_VERSION/.0/.}"
-# And again for patch version, just in case
-BOOKSTACK_VERSION="${BOOKSTACK_VERSION/.0/.}"
+BOOKSTACK_VERSION="${BOOKSTACK_VERSION//.0?/.}"
+
+# If the version only has one decimal dot in it, it doesn't have a patch
+# version and one should be added to ensure semver-shape.
+BS_DECIMALS="${BOOKSTACK_VERSION//[^.]}"
+if [[ "${#BS_DECIMALS}" -eq "1" ]]; then
+  BOOKSTACK_VERSION="${BOOKSTACK_VERSION}.0"
+fi
 
 echo "Tag name: ${BOOKSTACK_VERSION}"
 
