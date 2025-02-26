@@ -27,6 +27,13 @@ fi
 
 echo "Tag name: ${BOOKSTACK_VERSION}"
 
+read -p "Is the tag name correct? (y/n)" -n 1 -r
+echo
+if ! [[ "${REPLY}" =~ ^[Yy]$ ]]; then
+  echo "Aborting.."
+  exit 1
+fi
+
 git tag -s -a "${BOOKSTACK_VERSION}" -m "Release version ${BOOKSTACK_VERSION}"
 git push --tags
 
