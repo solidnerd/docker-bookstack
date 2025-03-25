@@ -76,7 +76,7 @@ Note that if you want to use LDAP, `$` has to be escape like `\$`, i.e. `-e "LDA
    -e DB_DATABASE=bookstack \
    -e DB_USERNAME=bookstack \
    -e DB_PASSWORD=secret \
-   -e APP_URL=http://example.com \
+   -e APP_URL=http://localhost:8080 \
    -e APP_KEY=SomeRandomStringWith32Characters \
    -p 8080:8080 \
    --name="bookstack_25.2.1" \
@@ -84,9 +84,9 @@ Note that if you want to use LDAP, `$` has to be escape like `\$`, i.e. `-e "LDA
    ```
 
     The APP_URL parameter should be the base URL for your BookStack instance without
-    a trailing slash. For example:
+    a trailing slash, but including any port numbers. For example:
 
-    `APP_URL=http://example.com`
+    `APP_URL=http://example.com` or `APP_URL=http://localhost:8080`.
 
     The following environment variables are required for Bookstack to start:
     - `APP_KEY`

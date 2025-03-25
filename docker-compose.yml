@@ -19,8 +19,12 @@ services:
     - DB_DATABASE=bookstack
     - DB_USERNAME=bookstack
     - DB_PASSWORD=secret
-    #set the APP_ to the URL of bookstack without without a trailing slash APP_URL=https://example.com
-    - APP_URL=http://example.com
+    # Set the APP_ to the URL of bookstack without without a trailing slash,
+    # but including any port numbers. For example, one of:
+    # APP_URL=https://example.com
+    # APP_URL=http://localhost:8080
+    # APP_URL=https://wiki.example.com:8443
+    - APP_URL=http://localhost:8080
     # APP_KEY is used for encryption where needed, so needs to be persisted to
     # preserve decryption abilities.
     # Can run `php artisan key:generate` to generate a key
