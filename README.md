@@ -48,32 +48,6 @@ If you have any issues feel free to create an [issue on GitHub](https://github.c
 
 Note that if you want to use LDAP, `$` has to be escape like `\$`, i.e. `-e "LDAP_USER_FILTER"="(&(uid=\${user}))"`
 
-Networking changed in Docker v1.9, so you need to do one of the following steps.
-
-### Docker < v1.9
-
-1. MySQL Container:
-
-   ```bash
-   docker run -d \
-   -p 3306:3306 \
-   -e MYSQL_ROOT_PASSWORD=secret \
-   -e MYSQL_DATABASE=bookstack \
-   -e MYSQL_USER=bookstack \
-   -e MYSQL_PASSWORD=secret \
-   --name bookstack_db \
-   mysql:9.2.0
-   ```
-
-2. BookStack Container:
-
-   ```bash
-   docker run -d --link bookstack_db_:mysql \
-   -p 8080:8080 \
-   --name bookstack_25.2.1 \
-   solidnerd/bookstack:25.2.1
-   ```
-
 ### Docker 1.9+
 
 1. Create a shared network:
