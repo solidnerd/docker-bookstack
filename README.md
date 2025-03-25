@@ -98,18 +98,14 @@ Note that if you want to use LDAP, `$` has to be escape like `\$`, i.e. `-e "LDA
 
 ### Volumes
 
-To access your `.env` file and important bookstack folders on your host system
-change `<HOST>` in the following line to your host directory and add it then to
-your run command:
+To access your important bookstack folders on your host system change `<HOST>`
+in the following line to your host directory and add it then to your run
+command:
 
 ```bash
---mount type=bind,source=<HOST>/.env,target=/var/www/bookstack/.env \
 -v <HOST>:/var/www/bookstack/public/uploads \
 -v <HOST>:/var/www/bookstack/storage/uploads
 ```
-
-In case of a windows host machine the .env file has to be already created in the
-host directory otherwise a folder named .env will be created.
 
 After these steps you can visit [http://localhost:8080](http://localhost:8080).
 You can login with username `admin@admin.com` and password `password`.
