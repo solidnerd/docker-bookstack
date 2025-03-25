@@ -103,6 +103,7 @@ Networking changed in Docker v1.9, so you need to do one of the following steps.
    -e DB_USERNAME=bookstack \
    -e DB_PASSWORD=secret \
    -e APP_URL=http://example.com \
+   -e APP_KEY=SomeRandomStringWith32Characters \
    -p 8080:8080 \
    --name="bookstack_25.2.1" \
     solidnerd/bookstack:25.2.1
