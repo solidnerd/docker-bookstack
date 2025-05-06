@@ -1,5 +1,5 @@
 FROM alpine:3 AS bookstack
-ENV BOOKSTACK_VERSION=v25.02.2
+ENV BOOKSTACK_VERSION=v25.02.3
 RUN apk add --no-cache curl tar
 RUN set -x; \
     curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/${BOOKSTACK_VERSION}.tar.gz  \
