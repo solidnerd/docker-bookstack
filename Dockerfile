@@ -1,5 +1,5 @@
 FROM alpine:3 AS bookstack
-ENV BOOKSTACK_VERSION=v25.05.2
+ENV BOOKSTACK_VERSION=v25.07
 RUN apk add --no-cache curl tar
 RUN set -x; \
     curl -SL -o bookstack.tar.gz https://github.com/BookStackApp/BookStack/archive/${BOOKSTACK_VERSION}.tar.gz  \
@@ -50,7 +50,7 @@ COPY bookstack.conf /etc/apache2/sites-available/000-default.conf
 
 COPY --from=bookstack --chown=33:33 /bookstack/ /var/www/bookstack/
 
-ARG COMPOSER_VERSION=2.7.6
+ARG COMPOSER_VERSION=2.8.10
 RUN set -x; \
     cd /var/www/bookstack \
     && curl -sS https://getcomposer.org/installer | php -- --version=$COMPOSER_VERSION \
