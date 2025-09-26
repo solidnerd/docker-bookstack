@@ -27,7 +27,7 @@ RUN set -x; \
         curl \
         libzip-dev \
         unzip \
-    && docker-php-ext-install -j$(nproc) dom pdo pdo_mysql zip tidy  \
+    && docker-php-ext-install -j$(nproc) pdo pdo_mysql zip tidy  \
     && docker-php-ext-configure ldap \
     && docker-php-ext-install -j$(nproc) ldap \
     && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
