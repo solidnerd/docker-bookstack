@@ -19,6 +19,7 @@ RUN set -x; \
         libpng-dev  \
         libldap2-dev  \
         libtidy-dev  \
+        libwebp-dev \
         libxml2-dev  \
         fontconfig  \
         fonts-freefont-ttf   \
@@ -30,7 +31,7 @@ RUN set -x; \
     && docker-php-ext-install -j$(nproc) pdo pdo_mysql zip tidy  \
     && docker-php-ext-configure ldap \
     && docker-php-ext-install -j$(nproc) ldap \
-    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ \
+    && docker-php-ext-configure gd --with-freetype=/usr/include/ --with-jpeg=/usr/include/ --with-webp=/usr/include/ \
     && docker-php-ext-install -j$(nproc) gd
 
 RUN a2enmod rewrite remoteip; \
