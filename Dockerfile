@@ -7,7 +7,7 @@ RUN set -x; \
     && tar xvf bookstack.tar.gz -C /bookstack --strip-components=1 \
     && rm bookstack.tar.gz
 
-FROM php:8.4-apache-bookworm AS final
+FROM php:8.5-apache-bookworm AS final
 RUN set -x; \
     apt-get update \
     && apt-get install -y --no-install-recommends \
