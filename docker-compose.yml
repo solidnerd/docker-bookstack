@@ -1,6 +1,6 @@
 services:
   mysql:
-    image: mysql:9.2
+    image: mysql:9.5
     environment:
     - MYSQL_ROOT_PASSWORD=secret
     - MYSQL_DATABASE=bookstack
