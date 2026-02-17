@@ -10,7 +10,7 @@ services:
     - mysql-data:/var/lib/mysql
 
   bookstack:
-    image: solidnerd/bookstack:25.12.4
+    image: solidnerd/bookstack:25.12.5
     depends_on:
     - mysql
     environment:
