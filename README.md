@@ -79,8 +79,8 @@ Note that if you want to use LDAP, `$` has to be escape like `\$`, i.e. `-e "LDA
    -e APP_URL=http://localhost:8080 \
    -e APP_KEY=SomeRandomStringWith32Characters \
    -p 8080:8080 \
-   --name="bookstack_25.12.6" \
-    solidnerd/bookstack:25.12.6
+   --name="bookstack_25.12.7" \
+    solidnerd/bookstack:25.12.7
    ```
 
     The APP_URL parameter should be the base URL for your BookStack instance without
