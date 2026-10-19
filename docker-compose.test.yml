@@ -1,6 +1,6 @@
 services:
   sut:
-    image: appropriate/curl
+    image: curlimages/curl:8.23.0
     command: ["--ipv4","--retry", "15","--retry-delay","5","--retry-connrefused","http://bookstack:8080/login"]
     depends_on:
     - bookstack
