@@ -7,7 +7,14 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
+    strategy:
+      matrix:
+        include:
+        - arch: amd64
+          runner: ubuntu-24.04
+        - arch: arm64
+          runner: ubuntu-24.04-arm
     steps:
     - name: Checkout
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -28,23 +35,33 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        platforms: linux/amd64
+        platforms: linux/${{ matrix.arch }}
         push: false
         tags: |
           ${{ steps.docker_meta_ci.outputs.tags }}
         labels: ${{ steps.docker_meta_ci.outputs.labels }}
-        cache-from: type=registry,ref=solidnerd/bookstack-dev:master
+        cache-from: |
+          type=registry,ref=solidnerd/bookstack-dev:master
+          type=gha,scope=${{ matrix.arch }}
+        cache-to: type=gha,scope=${{ matrix.arch }},mode=max
         outputs: type=docker,dest=/tmp/image-bookstack.tar
 
     - name: Upload artifact
       uses: actions/upload-artifact@v7
       with:
-        name: image-bookstack-master
+        name: image-bookstack-${{ matrix.arch }}
         path: /tmp/image-bookstack.tar
 
   e2e:
-    runs-on: ubuntu-latest
+    runs-on: ${{ matrix.runner }}
     needs: build
+    strategy:
+      matrix:
+        include:
+        - arch: amd64
+          runner: ubuntu-24.04
+        - arch: arm64
+          runner: ubuntu-24.04-arm
     steps:
     - name: Checkout
       uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
@@ -52,13 +69,16 @@ jobs:
     - name: Download artifact
       uses: actions/download-artifact@v8
       with:
-        name: image-bookstack-master
+        name: image-bookstack-${{ matrix.arch }}
         path: /tmp
 
     - name: Load Docker image
       run: |
         docker load --input /tmp/image-bookstack.tar
         docker image ls -a
+
+    - name: Execute End-to-End Test
+      run: make e2e
 
   push:
     runs-on: ubuntu-24.04
@@ -86,17 +106,6 @@ jobs:
           type=semver,pattern={{major}}.{{minor}}
           type=semver,pattern={{major}}.{{minor}}.{{patch}}
 
-    - name: Download artifact
-      uses: actions/download-artifact@v8
-      with:
-        name: image-bookstack-master
-        path: /tmp
-
-    - name: Load Docker image
-      run: |
-        docker load --input /tmp/image-bookstack.tar
-        docker image ls -a
-
     - name: Set up QEMU
       uses: docker/setup-qemu-action@v4
 
@@ -122,12 +131,15 @@ jobs:
       with:
         context: .
         file: ./Dockerfile
-        platforms: linux/amd64
+        platforms: linux/amd64,linux/arm64
         push: ${{ github.event_name != 'pull_request' }}
         tags: |
           ${{ steps.docker_meta.outputs.tags }}
         labels: ${{ steps.docker_meta.outputs.labels }}
-        cache-from: type=registry,ref=solidnerd/bookstack-dev:${{ github.sha }}
+        cache-from: |
+          type=registry,ref=solidnerd/bookstack-dev:${{ github.sha }}
+          type=gha,scope=amd64
+          type=gha,scope=arm64
         cache-to: type=registry,ref=solidnerd/bookstack-dev:${{ github.sha }}
 
     - name: Update repo description
