@@ -81,7 +81,7 @@ jobs:
       run: make e2e
 
   push:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: e2e
     steps:
     - name: Checkout
@@ -150,7 +150,7 @@ jobs:
         repository: solidnerd/bookstack
 
   create-release:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: push
     steps:
       # To use this repository's private action, you must check out the repository
